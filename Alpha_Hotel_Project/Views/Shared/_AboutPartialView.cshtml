@@ -1,0 +1,50 @@
+﻿@model HomeViewModel
+<!-- About hotel alpha start -->
+<div class="about-hotel-alpha content-area-6">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.Abouts)
+            {
+                <div class="col-lg-6 col-md-12 wow fadeInLeft delay-04s">
+                    <div class="about-img-section">
+                        <div class="image-box">
+                            <div class="image-1"><img src="~/uploads/about/@item.ImageBig" class="rounded" alt="photo"></div>
+                            <div class="image-2"><img src="~/uploads/about/@item.ImageSmall" class="rounded" alt="photo"></div>
+                        </div>
+                        <div class="about-box-Experience">
+                            <h3 class="text-white">@item.ExperienceBoxText</h3>
+                            <p class="mb-0 text-white">Years of Experience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 wow fadeInRight delay-04s align-self-center">
+                    <div class="about-content-section">
+                        <h5>Hotel <span>Bayview</span></h5>
+                        <h1>@item.Title</h1>
+                        <ul class="network-list mb-40">
+                            <li>
+                                <i class="icon fa fa-building-o"></i>
+                                <h4>Compact and Comfortable Rooms</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed magna aliqua.eius to mod incididunt</p>
+                            </li>
+                            <li>
+                                <i class="icon flaticon-room-service"></i>
+                                <h4>Friendly Fair Prices and Service</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed magna aliqua.eius to mod incididunt</p>
+                            </li>
+                            <li>
+                                <i class="icon flaticon-school-call-phone-reception"></i>
+                                <h4>Public Safety and 24/7 Security</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed magna aliqua.eius to mod incididunt</p>
+                            </li>
+                        </ul>
+                        <a class="btn-lg btn-5" href="#"><span>@item.ButtonText</span></a>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</div>
+<!-- About hotel alpha start -->

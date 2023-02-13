@@ -1,0 +1,87 @@
+﻿@model List<Staff>
+<!-- Sub banner start -->
+@await Html.PartialAsync("_TopHeaderPartialView")
+
+@await Html.PartialAsync("_MainHeaderPartialView")
+
+@await Html.PartialAsync("_BannerPartialView")
+<!-- Sub Banner end -->
+<!-- staff section start -->
+<div class="content-area staff-section">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="staff-box-1">
+                        <div class="photo">
+                            <img style="width:300px;height:360px" src="~/uploads/staff/@item.ImageUrl" alt="staff" class="img-fluid w-100">
+                            <div class="overlay">
+                                <div class="border">
+                                    <div class="icon-holder">
+                                        <a href="@item.FacebookUrl" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                    </div>
+                                    <div class="icon-holder">
+                                        <a href="@item.TwitterUrl" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                    <div class="icon-holder">
+                                        <a href="@item.GoogleUrl" class="google-bg"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h4 class="title">
+                                <a href="staff.html">@item.Fullname</a>
+                            </h4>
+                            <p>@item.Profession.Name</p>
+                            <p><a href="tel:@item.PhoneNumber">@item.PhoneNumber</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <!-- Page navigation start -->
+        <div class="pagination-box">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+                    </li>
+                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="staff-2.html">2</a></li>
+                    <li class="page-item"><a class="page-link" href="staff-3.html">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="staff-2.html"><i class="fa fa-angle-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Page navigation end -->
+    </div>
+</div>
+<!-- staff section end -->
+<!-- Partners strat -->
+<div class="partners bg-white">
+    <div class="container">
+        <h4>Brands <span>$ Partners</span></h4>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="custom-slider slide-box-btn">
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-1.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-2.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-3.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-4.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-5.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-6.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-1.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-2.png" alt="brand"></div>
+                    <div class="custom-box"><img src="~/assets/img/brand/brand-3.png" alt="brand"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Partners end -->
