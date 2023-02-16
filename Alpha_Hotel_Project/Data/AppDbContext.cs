@@ -1,9 +1,10 @@
 ﻿using Alpha_Hotel_Project.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alpha_Hotel_Project.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
@@ -15,5 +16,6 @@ namespace Alpha_Hotel_Project.Data
         public DbSet<Partner> Partners { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<AppUser> Users { get; set; }
     }
 }

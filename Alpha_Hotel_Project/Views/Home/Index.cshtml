@@ -1,5 +1,4 @@
 ﻿@model HomeViewModel
-
 <header class="main-header" id="main-header-2">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -120,6 +119,16 @@
                     </li>
                     <li class="nav-item">
                         <a href="booking-system.html" class="btn-lg btn-4 btn-6">Booking System</a>
+                    </li>
+                    <li>
+                        <ul class="top-social-media pull-right">
+                            <li>
+                                <a asp-action="login" asp-controller="account" class="sign-in"><i style="color:white" class="fa fa-sign-in"></i></a>
+                            </li>
+                            <li>
+                                <a asp-action="register" asp-controller="account" class="sign-in"><i style="color:white" class="fa fa-user"></i></a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

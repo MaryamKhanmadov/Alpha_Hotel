@@ -1,4 +1,7 @@
+using Alpha_Hotel_Project.Areas.Manage.Services;
 using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,19 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
+{
+    opt.Password.RequireUppercase = true;
+    opt.Password.RequireLowercase = true;
+    opt.Password.RequireDigit = true;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequiredUniqueChars = 0;
+    opt.Password.RequiredLength = 8;
+
+    opt.User.RequireUniqueEmail = false;
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.AddScoped<LayoutService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,7 +39,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
