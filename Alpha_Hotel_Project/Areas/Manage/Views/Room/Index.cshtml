@@ -1,0 +1,54 @@
+﻿@model List<Room>
+@{
+    int count = 0;
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 style="margin-bottom: 0.5rem !important;" class="mb-4 border-bottom">Room List</h6>
+            <a style="float:right" class="btn btn-danger m-2" asp-action="create" asp-controller="room">Create Room</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">PosterImage</th>
+                        <th scope="col">CreateDate</th>
+                        <th scope="col">Capacity</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">AdultPrice</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Avaliable</th>
+                        <th scope="col">Wifi</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody style="vertical-align: middle;">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>
+                                <div>
+                                    <img style="width: 50px;height:50px;border-radius: 50%;" src="~/uploads/rooms/@item.RoomImages.FirstOrDefault(x=>x.IsPoster is true).ImageUrl">
+                                </div>
+                            </td>
+                            <td>@item.RoomCreationDate</td>
+                            <td>@item.Capacity</td>
+                            <td>@item.Type</td>
+                            <td>@item.AdultPrice</td>
+                            <td>@item.Number</td>
+                            <td>@item.IsAvaliable</td>
+                            <td>@item.IsWifi</td>
+                            <td>
+                                <a class="btn btn-sm btn-sm-square btn-outline-success m-2" asp-action="update" asp-route-id="@item.Id" asp-controller="room"> <i class="fa fa-pen"></i> </a>
+                                <a class="btn btn-sm btn-sm-square btn-outline-danger m-2 delete-button" asp-route-id="@item.Id" asp-action="delete" asp-controller="room"> <i class="fa fa-trash"></i> </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

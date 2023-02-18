@@ -4,6 +4,7 @@ using Alpha_Hotel_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alpha_Hotel_Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230217191359_UpdateTableRooms")]
+    partial class UpdateTableRooms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,7 +158,7 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("ChildPrice")
@@ -185,9 +187,6 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("RoomCreationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -205,15 +204,16 @@ namespace Alpha_Hotel_Project.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsPoster")
+                    b.Property<bool?>("IsPoster")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("RoomId")
+                    b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -529,7 +529,9 @@ namespace Alpha_Hotel_Project.Migrations
                 {
                     b.HasOne("Alpha_Hotel_Project.Models.Category", "Category")
                         .WithMany("Rooms")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -538,7 +540,9 @@ namespace Alpha_Hotel_Project.Migrations
                 {
                     b.HasOne("Alpha_Hotel_Project.Models.Room", "Room")
                         .WithMany("RoomImages")
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Room");
                 });
