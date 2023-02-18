@@ -1,0 +1,76 @@
+﻿@model HomeViewModel
+@foreach (var item in Model.Rooms)
+{
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="hotel-box">
+            <!-- Photo thumbnail -->
+            <div class="photo-thumbnail">
+                <div class="photo">
+                    <img src="~/assets/img/room/img-1.jpg" alt="photo" class="img-fluid w-100">
+                    <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">
+                        <span class="blog-one__plus"></span>
+                    </a>
+                </div>
+                <div class="pr">
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-full"></i>
+                    </div>
+                    $@item.AdultPrice/Night
+                </div>
+            </div>
+            <!-- Detail -->
+            <div class="detail clearfix">
+                <h3>
+                    <a href="rooms-details.html">@item.Type</a>
+                </h3>
+                <p class="location">
+                    <a href="rooms-details.html">
+                        <i class="fa fa-map-marker"></i>@item.Location
+                    </a>
+                </p>
+                <div class="fecilities">
+                    <ul>
+                        <li>
+                            <i class="flaticon-bed"></i> Beds
+                        </li>
+                        <li>
+                            <i class="flaticon-air-conditioning"></i>
+                            AC
+                        </li>
+                        <li>
+                            <i class="flaticon-graph-line-screen"></i>
+                            TV
+                        </li>
+                        <li>
+                            <i class="flaticon-weightlifting"></i>
+                            GYM
+                        </li>
+                        @if (item.IsWifi==true)
+                        {
+                            <li>
+                                <i class="flaticon-wifi-connection-signal-symbol"></i>
+                                Wi-fi
+                            </li>
+                        }else{
+
+                        }
+                        @if (item.IsParking == true)
+                        {
+                            <li>
+                                <i class="flaticon-parking"></i>
+                                Parking
+                            </li>
+                        }
+                        else
+                        {}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

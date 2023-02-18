@@ -10,5 +10,7 @@ namespace Alpha_Hotel_Project.ViewModels
         public List<Slider> Sliders { get; set; }
         public List<Partner> Partners { get; set; }
         public List<About> Abouts { get; set; }
+        public List<Room> Rooms { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }

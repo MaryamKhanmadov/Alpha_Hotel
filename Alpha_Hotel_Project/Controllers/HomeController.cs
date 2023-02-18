@@ -23,7 +23,8 @@ namespace Alpha_Hotel_Project.Controllers
                 Facilities = _appDbContext.Facilities.Where(x => x.IsDeleted == false).ToList(),
                 Sliders = _appDbContext.Sliders.Where(x => x.IsDeleted == false).ToList(),
                 Partners = _appDbContext.Partners.Where(x => x.IsDeleted == false).ToList(),
-                Abouts = _appDbContext.Abouts.Where(x => x.IsDeleted == false).ToList()
+                Abouts = _appDbContext.Abouts.Where(x => x.IsDeleted == false).ToList(),
+                Rooms = _appDbContext.Rooms.Include(x=>x.Category).Where(x => x.IsDeleted == false).ToList(),
             };
             return View(homeViewModel);
         }

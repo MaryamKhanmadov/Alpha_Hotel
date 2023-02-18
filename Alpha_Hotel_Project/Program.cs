@@ -11,11 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("Default") , options =>
-    {
-        options.CommandTimeout(300);
-    });
-    opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>

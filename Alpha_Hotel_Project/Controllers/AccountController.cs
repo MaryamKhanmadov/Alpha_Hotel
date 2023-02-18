@@ -101,7 +101,7 @@ namespace Alpha_Hotel_Project.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("login", "account");
+            return RedirectToAction("login","account");
         }
     }
 

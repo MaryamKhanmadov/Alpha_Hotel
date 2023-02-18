@@ -1,4 +1,10 @@
 ﻿@model HomeViewModel
+
+@inject Alpha_Hotel_Project.Areas.Manage.Services.LayoutService service
+
+@{
+    AppUser appUser = await service.GetUser();
+}
 <header class="main-header" id="main-header-2">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -122,12 +128,23 @@
                     </li>
                     <li>
                         <ul class="top-social-media pull-right">
-                            <li>
-                                <a asp-action="login" asp-controller="account" class="sign-in"><i style="color:white" class="fa fa-sign-in"></i></a>
-                            </li>
-                            <li>
-                                <a asp-action="register" asp-controller="account" class="sign-in"><i style="color:white" class="fa fa-user"></i></a>
-                            </li>
+                            @if (User.Identity.IsAuthenticated is false)
+                            {
+                                <li style="color:white;text-color:white">
+                                    <a asp-action="login" itemid="staff" asp-controller="account"><i class="fa fa-sign-in"></i></a>
+                                </li>
+                                <li style="color:white;text-color:white">
+                                    <a asp-action="register" asp-controller="account"><i class="fa fa-user"></i></a>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li style="color:white;text-color:white">
+                                    <i class="fa fa-user" aria-hidden="true"></i><p style="color:white;text-color:white" class="text-success">@appUser.Fullname</p>
+                                    <a asp-action="logout" asp-controller="account"><i style="color:white;text-color:white" class="fa fa-sign-out" aria-hidden="true"></i></a>
+                                </li>
+                            }
                         </ul>
                     </li>
                 </ul>
@@ -300,372 +317,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
             </div>
             <div class="row wow fadeInUp delay-04s">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="hotel-box">
-                        <!-- Photo thumbnail -->
-                        <div class="photo-thumbnail">
-                            <div class="photo">
-                                <img src="~/assets/img/room/img-1.jpg" alt="photo" class="img-fluid w-100">
-                                <a href="rooms-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                            </div>
-                            <div class="pr">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-full"></i>
-                                </div>
-                                $567.99/Night
-                            </div>
-                        </div>
-                        <!-- Detail -->
-                        <div class="detail clearfix">
-                            <h3>
-                                <a href="rooms-details.html">Luxury Room</a>
-                            </h3>
-                            <p class="location">
-                                <a href="rooms-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </p>
-                            <div class="fecilities">
-                                <ul>
-                                    <li>
-                                        <i class="flaticon-bed"></i> Beds
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-air-conditioning"></i>
-                                        AC
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-graph-line-screen"></i>
-                                        TV
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-weightlifting"></i>
-                                        GYM
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                        Wi-fi
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-parking"></i>
-                                        Parking
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="hotel-box">
-                        <!-- Photo thumbnail -->
-                        <div class="photo-thumbnail">
-                            <div class="photo">
-                                <img src="~/assets/img/room/img-2.jpg" alt="phot" class="img-fluid w-100">
-                                <a href="rooms-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                            </div>
-                            <div class="pr">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-full"></i>
-                                </div>
-                                $567.99/Night
-                            </div>
-                        </div>
-                        <!-- Detail -->
-                        <div class="detail clearfix">
-                            <h3>
-                                <a href="rooms-details.html">Double Room</a>
-                            </h3>
-                            <p class="location">
-                                <a href="rooms-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </p>
-                            <div class="fecilities">
-                                <ul>
-                                    <li>
-                                        <i class="flaticon-bed"></i> Beds
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-air-conditioning"></i>
-                                        AC
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-graph-line-screen"></i>
-                                        TV
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-weightlifting"></i>
-                                        GYM
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                        Wi-fi
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-parking"></i>
-                                        Parking
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="hotel-box">
-                        <!-- Photo thumbnail -->
-                        <div class="photo-thumbnail">
-                            <div class="photo">
-                                <img src="~/assets/img/room/img-4.jpg" alt="photo" class="img-fluid w-100">
-                                <a href="rooms-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                            </div>
-                            <div class="pr">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-full"></i>
-                                </div>
-                                $567.99/Night
-                            </div>
-                        </div>
-                        <!-- Detail -->
-                        <div class="detail clearfix">
-                            <h3>
-                                <a href="rooms-details.html">Single Room</a>
-                            </h3>
-                            <p class="location">
-                                <a href="rooms-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </p>
-                            <div class="fecilities">
-                                <ul>
-                                    <li>
-                                        <i class="flaticon-bed"></i> Beds
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-air-conditioning"></i>
-                                        AC
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-graph-line-screen"></i>
-                                        TV
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-weightlifting"></i>
-                                        GYM
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                        Wi-fi
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-parking"></i>
-                                        Parking
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="hotel-box">
-                        <!-- Photo thumbnail -->
-                        <div class="photo-thumbnail">
-                            <div class="photo">
-                                <img src="~/assets/img/room/img-3.jpg" alt="photo" class="img-fluid w-100">
-                                <a href="rooms-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                            </div>
-                            <div class="pr">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-full"></i>
-                                </div>
-                                $567.99/Night
-                            </div>
-                        </div>
-                        <!-- Detail -->
-                        <div class="detail clearfix">
-                            <h3>
-                                <a href="rooms-details.html">Single Room </a>
-                            </h3>
-                            <p class="location">
-                                <a href="rooms-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </p>
-                            <div class="fecilities">
-                                <ul>
-                                    <li>
-                                        <i class="flaticon-bed"></i> Beds
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-air-conditioning"></i>
-                                        AC
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-graph-line-screen"></i>
-                                        TV
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-weightlifting"></i>
-                                        GYM
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                        Wi-fi
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-parking"></i>
-                                        Parking
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="hotel-box">
-                        <!-- Photo thumbnail -->
-                        <div class="photo-thumbnail">
-                            <div class="photo">
-                                <img src="~/assets/img/room/img-5.jpg" alt="photo" class="img-fluid w-100">
-                                <a href="rooms-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                            </div>
-                            <div class="pr">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-full"></i>
-                                </div>
-                                $567.99/Night
-                            </div>
-                        </div>
-                        <!-- Detail -->
-                        <div class="detail clearfix">
-                            <h3>
-                                <a href="rooms-details.html">Luxury Room</a>
-                            </h3>
-                            <p class="location">
-                                <a href="rooms-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </p>
-                            <div class="fecilities">
-                                <ul>
-                                    <li>
-                                        <i class="flaticon-bed"></i> Beds
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-air-conditioning"></i>
-                                        AC
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-graph-line-screen"></i>
-                                        TV
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-weightlifting"></i>
-                                        GYM
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                        Wi-fi
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-parking"></i>
-                                        Parking
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="hotel-box">
-                        <!-- Photo thumbnail -->
-                        <div class="photo-thumbnail">
-                            <div class="photo">
-                                <img src="~/assets/img/room/img-6.jpg" alt="photo" class="img-fluid w-100">
-                                <a href="rooms-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                            </div>
-                            <div class="pr">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-full"></i>
-                                </div>
-                                $567.99/Night
-                            </div>
-                        </div>
-                        <!-- Detail -->
-                        <div class="detail clearfix">
-                            <h3>
-                                <a href="rooms-details.html">Double Room</a>
-                            </h3>
-                            <p class="location">
-                                <a href="rooms-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </p>
-                            <div class="fecilities">
-                                <ul>
-                                    <li>
-                                        <i class="flaticon-bed"></i> Beds
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-air-conditioning"></i>
-                                        AC
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-graph-line-screen"></i>
-                                        TV
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-weightlifting"></i>
-                                        GYM
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                        Wi-fi
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-parking"></i>
-                                        Parking
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @await Html.PartialAsync("_RoomPartialView")
             </div>
         </div>
     </div>
