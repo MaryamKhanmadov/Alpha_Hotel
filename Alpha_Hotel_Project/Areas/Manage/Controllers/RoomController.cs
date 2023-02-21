@@ -181,8 +181,7 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             existroom.IsAvaliable = room.IsAvaliable;
             existroom.Location = room.Location;
             existroom.Capacity = room.Capacity;
-            existroom.Number = room.Number;
-            existroom.Type = room.Type;
+            //existroom.Type = room.Type;
 
             _context.SaveChanges();
             return RedirectToAction("Index");

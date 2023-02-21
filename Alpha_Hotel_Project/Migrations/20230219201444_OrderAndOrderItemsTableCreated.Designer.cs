@@ -4,6 +4,7 @@ using Alpha_Hotel_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alpha_Hotel_Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230219201444_OrderAndOrderItemsTableCreated")]
+    partial class OrderAndOrderItemsTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +117,8 @@ namespace Alpha_Hotel_Project.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<byte>("AdultCount")
                         .HasColumnType("tinyint");
@@ -123,24 +126,8 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<Guid?>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<byte>("ChildCount")
                         .HasColumnType("tinyint");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndRentDate")
                         .HasColumnType("datetime2");
@@ -153,34 +140,25 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Note")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("OrderDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("RoomId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime>("StartRentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("TotalPrice")
+                    b.Property<double?>("TotalPrice")
                         .HasColumnType("float");
 
                     b.Property<int>("Type")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("eMail")
                         .IsRequired()
@@ -189,7 +167,7 @@ namespace Alpha_Hotel_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -209,17 +187,13 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<double>("OneDayPrice")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RoomId")
+                    b.Property<Guid?>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoomName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TotalPrice")
+                    b.Property<double?>("TotalPrice")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -288,8 +262,7 @@ namespace Alpha_Hotel_Project.Migrations
 
                     b.Property<string>("Descreption")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvaliable")
                         .HasColumnType("bit");
@@ -305,13 +278,10 @@ namespace Alpha_Hotel_Project.Migrations
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("RoomCreationDate")
                         .HasColumnType("datetime2");
@@ -658,26 +628,22 @@ namespace Alpha_Hotel_Project.Migrations
 
             modelBuilder.Entity("Alpha_Hotel_Project.Models.Order", b =>
                 {
-                    b.HasOne("Alpha_Hotel_Project.Models.AppUser", "AppUser")
+                    b.HasOne("Alpha_Hotel_Project.Models.AppUser", "User")
                         .WithMany()
-                        .HasForeignKey("AppUserId1");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("AppUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Alpha_Hotel_Project.Models.OrderItem", b =>
                 {
                     b.HasOne("Alpha_Hotel_Project.Models.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("Alpha_Hotel_Project.Models.Room", "Room")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("RoomId");
 
                     b.Navigation("Order");
 
@@ -781,8 +747,6 @@ namespace Alpha_Hotel_Project.Migrations
 
             modelBuilder.Entity("Alpha_Hotel_Project.Models.Room", b =>
                 {
-                    b.Navigation("OrderItems");
-
                     b.Navigation("RoomImages");
                 });
 #pragma warning restore 612, 618

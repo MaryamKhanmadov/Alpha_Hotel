@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lDWJzoEEvKG8K7apoU+NEYoiN6zSxLhvJhB9TPciotI=",
+  "Hash": "a8FDYjWsKkG4hI9OPTgI7mJfV9a4/51ZRWpGejzF+5Y=",
   "Source": "Alpha_Hotel_Project",
   "BasePath": "_content/Alpha_Hotel_Project",
   "Mode": "Default",
@@ -4403,12 +4403,12 @@
       "OriginalItemSpec": "wwwroot\\uploads\\rooms\\052e50fe-bce3-4ed5-933f-3cc533acf40bimg-1.jpg"
     },
     {
-      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\0f4f8b99-8819-44fa-8395-6f7e00b05b6bteam-3.jpg",
+      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\057ba8fb-dae6-4c18-ab61-f1b49b654a44img-3.jpg",
       "SourceId": "Alpha_Hotel_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\",
       "BasePath": "_content/Alpha_Hotel_Project",
-      "RelativePath": "uploads/rooms/0f4f8b99-8819-44fa-8395-6f7e00b05b6bteam-3.jpg",
+      "RelativePath": "uploads/rooms/057ba8fb-dae6-4c18-ab61-f1b49b654a44img-3.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -4417,7 +4417,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\0f4f8b99-8819-44fa-8395-6f7e00b05b6bteam-3.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\057ba8fb-dae6-4c18-ab61-f1b49b654a44img-3.jpg"
     },
     {
       "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\141e57f4-cd4c-46dc-9eb6-1f025293c737img-17.jpg",
@@ -4471,6 +4471,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\rooms\\38b75bb5-4c0b-4fc0-8d2b-981c0ee89921room-b1.jpg"
     },
     {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\425561d9-1127-4d63-8951-0797f6b8a494img-9.jpg",
+      "SourceId": "Alpha_Hotel_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\",
+      "BasePath": "_content/Alpha_Hotel_Project",
+      "RelativePath": "uploads/rooms/425561d9-1127-4d63-8951-0797f6b8a494img-9.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\425561d9-1127-4d63-8951-0797f6b8a494img-9.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\521e7ede-9332-4e4e-8e81-17a4785be826img-11.jpg",
       "SourceId": "Alpha_Hotel_Project",
       "SourceType": "Discovered",
@@ -4486,6 +4503,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\rooms\\521e7ede-9332-4e4e-8e81-17a4785be826img-11.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\6a12e291-5188-4d89-8cd7-dfaa3b8bc5d3img-10.jpg",
+      "SourceId": "Alpha_Hotel_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\",
+      "BasePath": "_content/Alpha_Hotel_Project",
+      "RelativePath": "uploads/rooms/6a12e291-5188-4d89-8cd7-dfaa3b8bc5d3img-10.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\6a12e291-5188-4d89-8cd7-dfaa3b8bc5d3img-10.jpg"
     },
     {
       "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\6b818311-c0a8-4d8a-9fe4-ef68dd704284img-12.jpg",
@@ -4522,6 +4556,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\rooms\\7cb73a91-067e-441a-b65a-2e7dbd3405c4img-3.jpg"
     },
     {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\8ef9314c-7d49-4ab8-bd65-105c790ed6a4img-12.jpg",
+      "SourceId": "Alpha_Hotel_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\",
+      "BasePath": "_content/Alpha_Hotel_Project",
+      "RelativePath": "uploads/rooms/8ef9314c-7d49-4ab8-bd65-105c790ed6a4img-12.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\8ef9314c-7d49-4ab8-bd65-105c790ed6a4img-12.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\98420112-33e5-4e2f-b543-70d984ad0706img-4.jpg",
       "SourceId": "Alpha_Hotel_Project",
       "SourceType": "Discovered",
@@ -4554,6 +4605,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\rooms\\9c37c32a-3266-48db-b95d-d6f7aa03468eimg-5.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\aff137e1-9fd5-48c8-94a7-17518fe826fbimg-4.jpg",
+      "SourceId": "Alpha_Hotel_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\",
+      "BasePath": "_content/Alpha_Hotel_Project",
+      "RelativePath": "uploads/rooms/aff137e1-9fd5-48c8-94a7-17518fe826fbimg-4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\aff137e1-9fd5-48c8-94a7-17518fe826fbimg-4.jpg"
     },
     {
       "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\bc45aa99-dc97-4eaf-bb4a-df6ab3b61d00img-9.jpg",
@@ -4622,6 +4690,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\rooms\\eacb1d32-38eb-4b04-82ec-09c788cee7cbimg-2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\f7bab9b4-3a28-4dc6-9f02-dbfd0df16858img-2.jpg",
+      "SourceId": "Alpha_Hotel_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\",
+      "BasePath": "_content/Alpha_Hotel_Project",
+      "RelativePath": "uploads/rooms/f7bab9b4-3a28-4dc6-9f02-dbfd0df16858img-2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\rooms\\f7bab9b4-3a28-4dc6-9f02-dbfd0df16858img-2.jpg"
     },
     {
       "Identity": "C:\\Users\\Asus\\Desktop\\Alpha_Github\\Alpha_Hotel\\Alpha_Hotel_Project\\wwwroot\\uploads\\rooms\\f9cef837-a9fb-41fe-837f-310f2e0bb9b1room-4.jpg",

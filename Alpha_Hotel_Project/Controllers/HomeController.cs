@@ -28,5 +28,25 @@ namespace Alpha_Hotel_Project.Controllers
             };
             return View(homeViewModel);
         }
+        [HttpGet]
+        public IActionResult BookingSystem()
+        {
+            OrderViewModel orderViewModel = new OrderViewModel
+            {
+                Rooms = _appDbContext.Rooms.Include(x => x.RoomImages).Where(x => x.IsDeleted == false).Include(x => x.Category).Where(x => x.IsDeleted == false).ToList(),
+            };
+            //return Ok(orderViewModel);
+            return View(orderViewModel);
+        }
+        //[HttpPost]
+        //public IActionResult BookingSystem()
+        //{
+        //    //OrderViewModel orderViewModel = new OrderViewModel
+        //    //{
+        //    //    Rooms = _appDbContext.Rooms.Include(x => x.RoomImages).Where(x => x.IsDeleted == false).Include(x => x.Category).Where(x => x.IsDeleted == false).ToList(),
+        //    //};
+        //    ////return Ok(orderViewModel);
+        //    //return View(orderViewModel);
+        //}
     }
 }

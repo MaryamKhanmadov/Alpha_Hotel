@@ -19,5 +19,7 @@ namespace Alpha_Hotel_Project.Data
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomImage> RoomImages { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
