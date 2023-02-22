@@ -131,16 +131,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Home/BookingSystem.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCb29raW5nU3lzdGVtLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/BookingSystem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxCb29raW5nU3lzdGVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/Checkout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxDaGVja291dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/PaymentInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxQYXltZW50SW5mby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Shared/_AboutPartialView.cshtml]

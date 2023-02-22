@@ -43,7 +43,7 @@ namespace Alpha_Hotel_Project.Models
         public DateTime EndRentDate { get; set; }
 
         public Guid? AppUserId { get; set; }
-        public AppUser? AppUser { get; set; }
+        public AppUser? User { get; set; }
         public List<OrderItem>? OrderItems { get; set; }
         public Guid? RoomId { get; set; }
     }

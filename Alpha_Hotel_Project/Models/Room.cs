@@ -11,7 +11,6 @@ namespace Alpha_Hotel_Project.Models
         public string Name { get; set; }
         [StringLength(maximumLength: 50)]
         public string Location { get; set; }
-        [StringLength(maximumLength: 300)]
         public string Descreption { get; set; }
         [Range(0, int.MaxValue)]
         public int ViewCount { get; set; } = 0;

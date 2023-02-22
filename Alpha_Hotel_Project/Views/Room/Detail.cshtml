@@ -1,5 +1,5 @@
 ﻿@using Alpha_Hotel_Project.Enums
-@model OrderViewModel
+@model OrderItemViewModel
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -732,7 +732,7 @@
                             <h3>Check Availability</h3>
                             <h4 class="price">$260/Night</h4>
                             <div class="search-contents">
-                                <form method="post" enctype="multipart/form-data">
+                                <form method="post" asp-action="BookingSystem" asp-controller="room" asp-route-id="@Model.RoomId">
                                     <div class="search-your-details">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-6">
@@ -743,6 +743,7 @@
                                                     <label asp-for="StartRentDate">Start Date</label>
                                                     <input asp-for="StartRentDate">
                                                     <span asp-validation-for="StartRentDate"></span>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-6">

@@ -107,7 +107,7 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             {
                 string path = Path.Combine(_env.WebRootPath, "uploads/rooms", item.ImageUrl);
                 System.IO.File.Delete(path);
-                _context.Remove(item);
+                //_context.RoomImages.Remove(item);
             }
             existroom.RoomImages.RemoveAll(ai => !room.RoomImageIds.Contains(ai.Id) && ai.IsPoster is false);
 
@@ -181,7 +181,8 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             existroom.IsAvaliable = room.IsAvaliable;
             existroom.Location = room.Location;
             existroom.Capacity = room.Capacity;
-            //existroom.Type = room.Type;
+            existroom.Type = room.Type;
+            existroom.Name = room.Name;
 
             _context.SaveChanges();
             return RedirectToAction("Index");

@@ -6,7 +6,7 @@
             <!-- Photo thumbnail -->
             <div class="photo-thumbnail">
                 <div class="photo">
-                    <img src="~/assets/img/room/img-1.jpg" alt="photo" class="img-fluid w-100">
+                    <img src="~/uploads/rooms/@item.RoomImages.FirstOrDefault(x=>x.IsPoster==true).ImageUrl" alt="photo" class="img-fluid w-100">
                     <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">
                         <span class="blog-one__plus"></span>
                     </a>
@@ -25,7 +25,7 @@
             <!-- Detail -->
             <div class="detail clearfix">
                 <h3>
-                    <a href="rooms-details.html">@item.Type</a>
+                    <a href="rooms-details.html">@item.Name</a>
                 </h3>
                 <p class="location">
                     <a href="rooms-details.html">

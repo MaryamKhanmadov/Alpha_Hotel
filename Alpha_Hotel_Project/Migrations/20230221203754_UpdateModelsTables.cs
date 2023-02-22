@@ -5,21 +5,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alpha_Hotel_Project.Migrations
 {
-    public partial class UpdateModels : Migration
+    public partial class UpdateModelsTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_OrderItems_Orders_OrderId",
-                table: "OrderItems");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_OrderItems_Rooms_RoomId",
                 table: "OrderItems");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_AspNetUsers_UserId",
-                table: "Orders");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Orders_Rooms_RoomId",
@@ -37,30 +29,11 @@ namespace Alpha_Hotel_Project.Migrations
                 name: "OrderDay",
                 table: "Orders");
 
-            migrationBuilder.RenameColumn(
-                name: "UserId",
-                table: "Orders",
-                newName: "AppUserId1");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Orders_UserId",
-                table: "Orders",
-                newName: "IX_Orders_AppUserId1");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Location",
                 table: "Rooms",
                 type: "nvarchar(50)",
                 maxLength: 50,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Descreption",
-                table: "Rooms",
-                type: "nvarchar(300)",
-                maxLength: 300,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
@@ -159,16 +132,6 @@ namespace Alpha_Hotel_Project.Migrations
                 oldType: "uniqueidentifier",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "OrderId",
-                table: "OrderItems",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-
             migrationBuilder.AddColumn<string>(
                 name: "RoomName",
                 table: "OrderItems",
@@ -177,42 +140,19 @@ namespace Alpha_Hotel_Project.Migrations
                 defaultValue: "");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_OrderItems_Orders_OrderId",
-                table: "OrderItems",
-                column: "OrderId",
-                principalTable: "Orders",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_OrderItems_Rooms_RoomId",
                 table: "OrderItems",
                 column: "RoomId",
                 principalTable: "Rooms",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_AspNetUsers_AppUserId1",
-                table: "Orders",
-                column: "AppUserId1",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_OrderItems_Orders_OrderId",
-                table: "OrderItems");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_OrderItems_Rooms_RoomId",
                 table: "OrderItems");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_AspNetUsers_AppUserId1",
-                table: "Orders");
 
             migrationBuilder.DropColumn(
                 name: "Name",
@@ -242,16 +182,6 @@ namespace Alpha_Hotel_Project.Migrations
                 name: "RoomName",
                 table: "OrderItems");
 
-            migrationBuilder.RenameColumn(
-                name: "AppUserId1",
-                table: "Orders",
-                newName: "UserId");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Orders_AppUserId1",
-                table: "Orders",
-                newName: "IX_Orders_UserId");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Location",
                 table: "Rooms",
@@ -260,15 +190,6 @@ namespace Alpha_Hotel_Project.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(50)",
                 oldMaxLength: 50);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Descreption",
-                table: "Rooms",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(300)",
-                oldMaxLength: 300);
 
             migrationBuilder.AddColumn<int>(
                 name: "Number",
@@ -325,38 +246,16 @@ namespace Alpha_Hotel_Project.Migrations
                 oldClrType: typeof(Guid),
                 oldType: "uniqueidentifier");
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "OrderId",
-                table: "OrderItems",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_RoomId",
                 table: "Orders",
                 column: "RoomId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_OrderItems_Orders_OrderId",
-                table: "OrderItems",
-                column: "OrderId",
-                principalTable: "Orders",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_OrderItems_Rooms_RoomId",
                 table: "OrderItems",
                 column: "RoomId",
                 principalTable: "Rooms",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_AspNetUsers_UserId",
-                table: "Orders",
-                column: "UserId",
-                principalTable: "AspNetUsers",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(

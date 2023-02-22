@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alpha_Hotel_Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230221200611_UpdateModels")]
-    partial class UpdateModels
+    [Migration("20230221203754_UpdateModelsTables")]
+    partial class UpdateModelsTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,9 +125,6 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<Guid?>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<byte>("ChildCount")
                         .HasColumnType("tinyint");
 
@@ -179,6 +176,9 @@ namespace Alpha_Hotel_Project.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -191,7 +191,7 @@ namespace Alpha_Hotel_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -211,7 +211,7 @@ namespace Alpha_Hotel_Project.Migrations
                     b.Property<double>("OneDayPrice")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("RoomId")
@@ -290,8 +290,7 @@ namespace Alpha_Hotel_Project.Migrations
 
                     b.Property<string>("Descreption")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvaliable")
                         .HasColumnType("bit");
@@ -660,20 +659,18 @@ namespace Alpha_Hotel_Project.Migrations
 
             modelBuilder.Entity("Alpha_Hotel_Project.Models.Order", b =>
                 {
-                    b.HasOne("Alpha_Hotel_Project.Models.AppUser", "AppUser")
+                    b.HasOne("Alpha_Hotel_Project.Models.AppUser", "User")
                         .WithMany()
-                        .HasForeignKey("AppUserId1");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("AppUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Alpha_Hotel_Project.Models.OrderItem", b =>
                 {
                     b.HasOne("Alpha_Hotel_Project.Models.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("Alpha_Hotel_Project.Models.Room", "Room")
                         .WithMany("OrderItems")
