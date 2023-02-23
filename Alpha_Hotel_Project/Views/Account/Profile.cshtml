@@ -1,0 +1,37 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Profile";
+    int count = 0;
+}
+
+    <div class="container" style="min-height:50vh">
+        <h1 style="padding: 18px;">Orders:</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">OrderId</th>
+                    <th scope="col">FullName</th>
+                    <th scope="col">OrderStatus</th>
+                    <th scope="col">TotalPrice</th>
+                </tr>
+            </thead>
+        <tbody style="vertical-align: middle;">
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@item.Id</td>
+                    <td>@item.OrderItem.Fullname</td>
+                    <td>
+                        <span style="font-size:15px;padding:5px 16px;" class="btn btn-@(item.OrderStatus == Alpha_Hotel_Project.Enums.OrderStatus.Pending ? "secondary"
+                        :(item.OrderStatus == Alpha_Hotel_Project.Enums.OrderStatus.Accepted ? "success"
+                        : "danger"))  rounded-pill m-2">@item.OrderStatus</span>
+                    </td>
+                    <td>@item.OrderItem.TotalPrice.ToString("0.00")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -4,6 +4,7 @@ using Alpha_Hotel_Project.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Threading;
 
 namespace Alpha_Hotel_Project.Controllers
@@ -22,7 +23,6 @@ namespace Alpha_Hotel_Project.Controllers
         public async Task<IActionResult> Detail(Guid id)
         {
             AppUser member = null;
-
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 member = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
@@ -40,22 +40,27 @@ namespace Alpha_Hotel_Project.Controllers
             _appDbContext.SaveChanges();
             return View(orderViewModel);
         }
-
-
         [HttpPost]
         public async Task<IActionResult> BookingSystem(Guid id, OrderViewModel orderVM)
         {
+            AppUser member = null;
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                member = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            }
             Room room = _appDbContext.Rooms.Include(x => x.RoomImages).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
-
             orderVM.Room = room;
-            if (!ModelState.IsValid) { return View(orderVM); }
-
+            if(orderVM.Country == "Country") {
+                ModelState.AddModelError("", "The Country field is required.");
+                return View("detail", orderVM);
+            }
+            if (!ModelState.IsValid) { return View("detail" , orderVM); }
             int Startdate = orderVM.StartRentDate.DayOfYear;
             int Enddate = orderVM.EndRentDate.DayOfYear;
             int DayCount = Enddate - Startdate;
-            //if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid) return View("detail", orderVM);
             double TotalPrice = DayCount * (room.AdultPrice*orderVM.AdultCount + room.ChildPrice*orderVM.ChildCount);
-            foreach (var item in _appDbContext.Orders)
+            foreach (var item in _appDbContext.OrderItems.Include(x=>x.Order).Where(x=>x.RoomId==orderVM.Room.Id).Where(x=>x.Order!=null))
             {
                 int date = item.StartRentDate.DayOfYear;
                 int date2 = item.EndRentDate.DayOfYear;
@@ -65,117 +70,90 @@ namespace Alpha_Hotel_Project.Controllers
                     {
                         if (i == j)
                         {
-                            ModelState.AddModelError("", "Already Reserverd");
-                            return View(orderVM);
+                            ModelState.AddModelError("", "Already Reserved");
+                            return View("detail", orderVM);
                         }
                     }
                 }
             }
-
             if (orderVM.EndRentDate < orderVM.StartRentDate)
             {
-                ModelState.AddModelError("EndRentDate", "Choice correct date");
-                return View(orderVM);
+                ModelState.AddModelError("EndRentDate", "Please , choice correct date");
+                return View("detail", orderVM);
             }
             if (orderVM.StartRentDate < DateTime.Now)
             {
-                ModelState.AddModelError("StartRentDate", "Choice correct date");
-                return View(orderVM);
+                ModelState.AddModelError("StartRentDate", "Please , choice correct date");
+                return View("detail", orderVM);
             }
             if (orderVM.EndRentDate < DateTime.Now)
             {
-                ModelState.AddModelError("EndRentDate", "Choice correct date");
-                return View(orderVM);
+                ModelState.AddModelError("EndRentDate", "Please , choice correct date");
+                return View("detail", orderVM);
             }
             if (DayCount > 30)
             {
-                ModelState.AddModelError("EndRentDate", "Up to 1 month reservation allowed");
-                return View(orderVM);
+                ModelState.AddModelError("EndRentDate", "Up to 30 day reservation allowed");
+                return View("detail", orderVM);
             }
             if (orderVM.ChildCount < 0 || orderVM.AdultCount < 0)
             {
-                ModelState.AddModelError("ChildCount", "Select correct count");
-                return View(orderVM);
+                ModelState.AddModelError("ChildCount", "Please , select correct count");
+                return View("detail", orderVM);
             }
             if (orderVM.StartRentDate.DayOfYear == orderVM.EndRentDate.DayOfYear)
             {
                 ModelState.AddModelError("StartRentDate", "Reservation allowed from 1 up to 30 days");
-                return View(orderVM);
+                return View("detail", orderVM);
             }
-            //Order order = null;
-            //order = new Order
-            //{
-            //    EndRentDate = orderVM.EndRentDate,
-            //    ChildCount = orderVM.ChildCount,
-            //    AdultCount = orderVM.AdultCount,
-            //    Address = orderVM.Address,
-            //    StartRentDate = orderVM.StartRentDate,
-            //    eMail = orderVM.eMail,
-            //    Fullname = orderVM.Fullname,
-            //    PhoneNumber = orderVM.PhoneNumber,
-            //    //TotalPrice = TotalPrice,
-            //    Type = orderVM.Type
-            //};
-            //_appDbContext.Orders.Add(order);
-
-            //OrderItem orderItem = null;
-            //orderItem = new OrderItem
-            //{
-            //    DayCount = DayCount,
-            //    OneDayPrice = orderVM.AdultPrice,
-            //    //Order = order,
-            //    RoomId = orderVM.Room.Id,
-            //    //TotalPrice = TotalPrice
-            //};
-            //_appDbContext.OrderItems.Add(orderItem);
-            AppUser member = null; 
-
-            if (HttpContext.User.Identity.IsAuthenticated)
+            
+            OrderItem orderItem = new OrderItem
             {
-                member = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-            }
-            OrderViewModel orderViewModel = new OrderViewModel
-            {
-                Rooms = _appDbContext.Rooms.Include(x => x.RoomImages).Where(x => x.IsDeleted == false).Include(x => x.Category).ToList(),
-                Room = orderVM.Room,
-                //Room = room,
+                RoomId = room.Id,
+                TotalPrice = TotalPrice,
+                DayCount = DayCount,
+                Room = room,
+                Fullname = orderVM.Fullname,
+                Country = orderVM.Country,
+                Address = orderVM.Address,
+                City = orderVM.City,
+                ZipCode = orderVM.ZipCode,
+                Note = orderVM.Note,
+                PhoneNumber = orderVM.PhoneNumber,
+                eMail = orderVM.eMail,
                 AdultCount = orderVM.AdultCount,
                 ChildCount = orderVM.ChildCount,
                 Type = orderVM.Type,
                 StartRentDate = orderVM.StartRentDate,
                 EndRentDate = orderVM.EndRentDate,
-                ZipCode = orderVM.ZipCode,
-                Note = orderVM.Note,
-                Country = orderVM.Country,
-                City = orderVM.City,
-                Address = orderVM.Address,
-                Fullname = member?.Fullname,
-                eMail = member?.Email,
-                PhoneNumber = member?.PhoneNumber,
-                AppUserId = orderVM.AppUserId,
+                AppUserId = member?.Id,
             };
-            return Ok(orderViewModel);
-            _appDbContext.SaveChanges();
-            //return Redirect(Url.RouteUrl(new { controller = "room", action = "bookingsystem", id = orderItemVM.Room.Id }) + "#step-2");
-            //return RedirectToAction("bookingsystem", "home", orderItemVM.Room.Id , new {otherparam = });
-            //return View(orderItemVM);
-            //return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Order(Guid id,OrderViewModel orderViewModel)
-        {
-            Room room = _appDbContext.Rooms.FirstOrDefault(x=>x.Id==id);
-            OrderViewModel orderVM = new OrderViewModel
+            _appDbContext.OrderItems.Add(orderItem);
+            CheckOutViewModel checkOutViewModel = new CheckOutViewModel
             {
-                RoomId = room.Id,
-                Room = room,
-                CardMonth = orderViewModel.CardMonth,
-                CardNumber = orderViewModel.CardNumber,
-                CardYear = orderViewModel.CardYear,
-                CVV = orderViewModel.CVV,
+                OrderItem = orderItem,
+                OrderItemId = orderItem.Id,
             };
-            return Ok(orderViewModel);
+            _appDbContext.SaveChanges();
+            return View(checkOutViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Order(Guid id, CheckOutViewModel checkOutViewModel)
+        {
+            OrderItem orderItem = _appDbContext.OrderItems.FirstOrDefault(x => x.Id == id);
+            Order order = new Order
+            {
+                OrderItem = orderItem,
+                CardMonth = checkOutViewModel.CardMonth,
+                CardYear = checkOutViewModel.CardYear,
+                CardNumber = checkOutViewModel.CardNumber,
+                AppUserId = orderItem.AppUserId,
+                RoomId = orderItem.RoomId,
+                CVV = checkOutViewModel.CVV
+            };
+            _appDbContext.Orders.Add(order);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("index","home");
         }
 
         //[HttpPost]
@@ -309,33 +287,6 @@ namespace Alpha_Hotel_Project.Controllers
         //{
 
         //}
-
-        [HttpPost]
-        public IActionResult CheckOut(Guid id , OrderViewModel orderViewModel)
-        {
-            Room room = _appDbContext.Rooms.Include(x => x.RoomImages).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
-            orderViewModel.Room = room;
-            return View(orderViewModel);
-        }
-
-
-        [HttpPost]
-        public IActionResult paymentinfo(OrderViewModel orderViewModel)
-        {
-            OrderViewModel orderView = new OrderViewModel
-            {
-                
-            };
-            //OrderViewModel orderViewModel1 = new OrderViewModel
-            //{
-            //    Fullname = orderViewModel?.Fullname,
-            //    Address = orderViewModel?.Address,
-            //    City = orderViewModel?.City,
-            //    OrderItemView = orderViewModel.OrderItemView,
-            //};
-
-            return Ok(orderViewModel);
-        }
         
     }
 }

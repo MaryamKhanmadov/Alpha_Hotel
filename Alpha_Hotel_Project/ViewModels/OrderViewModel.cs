@@ -6,12 +6,12 @@ namespace Alpha_Hotel_Project.ViewModels
 {
     public class OrderViewModel
     {
-        public CheckOutViewModel CheckOutVM { get; set; }
+        public CheckOutViewModel? CheckOutVM { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
         public string? Note { get; set; }
-        public Room Room { get; set; }
+        public Room? Room { get; set; }
         public string Fullname { get; set; }
         [Required]
         [StringLength(maximumLength: 30), DataType(DataType.PhoneNumber)]
@@ -35,14 +35,10 @@ namespace Alpha_Hotel_Project.ViewModels
         [Required]
         [DataType(DataType.Date)]
         public DateTime EndRentDate { get; set; }
-        public Guid? AppUserId { get; set; }
+        public string? AppUserId { get; set; }
         public Guid? RoomId { get; set; }
         public AppUser? AppUser { get; set; }
         public double AdultPrice { get; set; }
-        public string? CardNumber { get; set; }
-        public int? CardMonth { get; set; }
-        public int? CardYear { get; set; }
-        public int? CVV { get; set; }
-        public List<Room> Rooms { get; set; }
+        public List<Room>? Rooms { get; set; }
     }
 }

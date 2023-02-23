@@ -47,6 +47,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEZhY2lsaXR5XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Areas/Manage/Views/Order/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE9yZGVyXERldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Areas/Manage/Views/Order/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE9yZGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Areas/Manage/Views/Partner/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFBhcnRuZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -127,6 +135,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Account/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -137,10 +149,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/BookingSystem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxCb29raW5nU3lzdGVtLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/Checkout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxDaGVja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Alpha_Github/Alpha_Hotel/Alpha_Hotel_Project/Views/Room/Detail.cshtml]

@@ -103,6 +103,17 @@ namespace Alpha_Hotel_Project.Controllers
 
             return RedirectToAction("login","account");
         }
+
+        public async Task<IActionResult> Profile()
+        {
+            AppUser member = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                member = await _userManager.FindByNameAsync(User.Identity.Name);
+            }
+            List<Order> orders = _appDbContext.Orders.Include(x=>x.OrderItem).Where(x=>x.AppUserId == member.Id).ToList();
+            return View(orders);
+        }
     }
 
 }

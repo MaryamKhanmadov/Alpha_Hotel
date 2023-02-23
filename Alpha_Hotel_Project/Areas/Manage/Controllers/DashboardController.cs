@@ -46,13 +46,13 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         //    return Ok("Success");
         //}
 
-        //public async Task<IActionResult> AddRole()
-        //{
-        //    AppUser appUser = await _userManager.FindByNameAsync("Maryam");
+        public async Task<IActionResult> AddRole()
+        {
+            AppUser appUser = await _userManager.FindByNameAsync("Maryam");
 
-        //    await _userManager.AddToRoleAsync(appUser, "SuperAdmin");
+            await _userManager.AddToRoleAsync(appUser, "SuperAdmin");
 
-        //    return Ok("Role Added");
-        //}
+            return Ok("Role Added");
+        }
     }
 }
