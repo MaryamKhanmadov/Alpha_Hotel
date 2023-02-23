@@ -1,5 +1,10 @@
 ﻿@using Alpha_Hotel_Project.Enums
-@model OrderItemViewModel
+@model OrderViewModel
+@inject Alpha_Hotel_Project.Areas.Manage.Services.LayoutService service
+
+@{
+    AppUser appUser = await service.GetUser();
+}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -590,137 +595,6 @@
                             </div>
                         </div>
                         <!-- Contact-2 end -->
-                        <!-- Similar room start -->
-                        <div class="similar-rooms">
-                            <div class="main-title-2">
-                                <h1>Similar Rooms</h1>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="hotel-box">
-                                        <!-- Photo thumbnail -->
-                                        <div class="photo-thumbnail">
-                                            <div class="photo">
-                                                <img src="~/assets/img/room/img-1.jpg" alt="photo" class="img-fluid w-100">
-                                                <a href="~/assets/rooms-details.html">
-                                                    <span class="blog-one__plus"></span>
-                                                </a>
-                                            </div>
-                                            <div class="pr">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                </div>
-                                                $567.99/Night
-                                            </div>
-                                        </div>
-                                        <!-- Detail -->
-                                        <div class="detail clearfix">
-                                            <h3>
-                                                <a href="~/assets/rooms-details.html">Luxury Room</a>
-                                            </h3>
-                                            <p class="location">
-                                                <a href="~/assets/rooms-details.html">
-                                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                                </a>
-                                            </p>
-                                            <div class="fecilities">
-                                                <ul>
-                                                    <li>
-                                                        <i class="flaticon-bed"></i> Beds
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-air-conditioning"></i>
-                                                        AC
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-graph-line-screen"></i>
-                                                        TV
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-weightlifting"></i>
-                                                        GYM
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                                        Wi-fi
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-parking"></i>
-                                                        Parking
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="hotel-box">
-                                        <!-- Photo thumbnail -->
-                                        <div class="photo-thumbnail">
-                                            <div class="photo">
-                                                <img src="~/assets/img/room/img-2.jpg" alt="phot" class="img-fluid w-100">
-                                                <a href="~/assets/rooms-details.html">
-                                                    <span class="blog-one__plus"></span>
-                                                </a>
-                                            </div>
-                                            <div class="pr">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                </div>
-                                                $567.99/Night
-                                            </div>
-                                        </div>
-                                        <!-- Detail -->
-                                        <div class="detail clearfix">
-                                            <h3>
-                                                <a href="~/assets/rooms-details.html">Double Room</a>
-                                            </h3>
-                                            <p class="location">
-                                                <a href="~/assets/rooms-details.html">
-                                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                                </a>
-                                            </p>
-                                            <div class="fecilities">
-                                                <ul>
-                                                    <li>
-                                                        <i class="flaticon-bed"></i> Beds
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-air-conditioning"></i>
-                                                        AC
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-graph-line-screen"></i>
-                                                        TV
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-weightlifting"></i>
-                                                        GYM
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                                        Wi-fi
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-parking"></i>
-                                                        Parking
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Similar room end -->
                     </div>
                     <!-- Course details section end -->
                 </div>
@@ -732,71 +606,144 @@
                             <h3>Check Availability</h3>
                             <h4 class="price">$260/Night</h4>
                             <div class="search-contents">
-                                <form method="post" asp-action="BookingSystem" asp-controller="room" asp-route-id="@Model.RoomId">
-                                    <div class="search-your-details">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-6">
-                                                <div class="form-group">
-                                                    @*<input asp-for="StartRentDate" class="btn-default datepicker" placeholder="Check In">
+                                @if (User.Identity.IsAuthenticated is true){
+                                    <form method="post" asp-action="BookingSystem" asp-controller="room" asp-route-id="@Model.Room.Id">
+                                        <div class="search-your-details">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        @*<input asp-for="StartRentDate" class="btn-default datepicker" placeholder="Check In">
                                                     <label class="btn-default datepicker" asp-for="StartRentDate"></label>
                                                     <span asp-validation-for="StartRentDate" style="color:red"></span>*@
-                                                    <label asp-for="StartRentDate">Start Date</label>
-                                                    <input asp-for="StartRentDate">
-                                                    <span asp-validation-for="StartRentDate"></span>
-                                                    
+                                                        <label asp-for="StartRentDate">Start Date</label>
+                                                        <input asp-for="StartRentDate" value="@DateTime.Now" />
+                                                        <span asp-validation-for="StartRentDate"></span>
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12 col-sm-6">
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        @*<input asp-for="EndRentDate" class="btn-default datepicker" placeholder="Check Out">*@
+                                                        @*<span asp-validation-for="EndRentDate" style="color:red"></span>*@
+                                                        <label asp-for="EndRentDate">End Date</label>
+                                                        <input asp-for="EndRentDate" value="@DateTime.Now" class="form-controller">
+                                                        <span asp-validation-for="EndRentDate"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <span asp-validation-for="Type" class="text-danger"></span>
+                                                        <select asp-for="Type" class="selectpicker" asp-items="Html.GetEnumSelectList<RoomType>()">
+                                                            <option>Room</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <span asp-validation-for="AdultCount" class="text-danger"></span>
+                                                        <select asp-for="AdultCount" class="selectpicker search-fields">
+                                                            <option>Adult</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <span asp-validation-for="ChildCount" class="text-danger"></span>
+                                                        <select asp-for="ChildCount" class="selectpicker search-fields">
+                                                            <option>Child</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group firstname">
+                                                        <label asp-for="Fullname" class="form-label">Full Name</label>
+                                                        <input asp-for="Fullname" class="form-control" id="inputfirstname" placeholder="Full Name">
+                                                        <span asp-validation-for="Fullname" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group address-line-1">
+                                                        <label asp-for="Address" class="form-label">Address Line</label>
+                                                        <input asp-for="Address" class="form-control" id="inputaddress-line3" placeholder="Address Line">
+                                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="form-group address-line-2">
+                                                        <label asp-for="City" class="form-label">City</label>
+                                                        <input asp-for="City" class="form-control" id="inputcity2" placeholder="City">
+                                                        <span asp-validation-for="City" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="form-group address-line-2">
+                                                        <label asp-for="ZipCode" class="form-label">Zip/Post Code</label>
+                                                        <input asp-for="ZipCode" class="form-control" id="inputcode2" placeholder="Zip">
+                                                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group address-line-2">
+                                                        <label asp-for="PhoneNumber" class="form-label">PhoneNumber</label>
+                                                        <input asp-for="PhoneNumber" class="form-control" id="inputcode2" placeholder="PhoneNumber">
+                                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group address-line-2">
+                                                        <label asp-for="eMail" class="form-label">eMail</label>
+                                                        <input asp-for="eMail" class="form-control" id="inputcode2" placeholder="eMail">
+                                                        <span asp-validation-for="eMail" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group country">
+                                                        <label asp-for="Country">Country</label>
+                                                        <select asp-for="Country">
+                                                            <option>County</option>
+                                                            <option>United Kingdom</option>
+                                                            <option>Canada</option>
+                                                            <option>Australia</option>
+                                                            <option>France</option>
+                                                            <option>Spain</option>
+                                                            <option>Brazil</option>
+                                                            <option>Bhutan</option>
+                                                            <option>Bangladesh</option>
+                                                            <option>India</option>
+                                                        </select>
+                                                        <span asp-validation-for="Country" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-6">
+                                                        <div class="form-group address-line-2">
+                                                            <label asp-for="Note" class="form-label">Note</label>
+                                                            <textarea asp-for="Note" class="form-control" id="inputcode2" placeholder="Note..."></textarea>
+                                                            <span asp-validation-for="Note" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group mb-0">
+                                                        <button type="submit" class="btn-md btn-theme btn-4 btn-7 w-100">Book Now</button>
+                                                    </div>
+                                                </div>
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                 <div class="form-group">
-                                                    @*<input asp-for="EndRentDate" class="btn-default datepicker" placeholder="Check Out">*@
-                                                    @*<span asp-validation-for="EndRentDate" style="color:red"></span>*@
-                                                    <label asp-for="EndRentDate">End Date</label>
-                                                    <input asp-for="EndRentDate" class="form-controller">
-                                                    <span asp-validation-for="EndRentDate"></span>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group">
-                                                    <span asp-validation-for="Type" class="text-danger"></span>
-                                                    <select asp-for="Type" class="selectpicker search-fields" asp-items="Html.GetEnumSelectList<RoomType>()">
-                                                        <option>Room</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group">
-                                                    <span asp-validation-for="AdultCount" class="text-danger"></span>
-                                                    <select asp-for="AdultCount" class="selectpicker search-fields">
-                                                        <option>Adult</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group">
-                                                    <span asp-validation-for="ChildCount" class="text-danger"></span>
-                                                    <select asp-for="ChildCount" class="selectpicker search-fields">
-                                                        <option>Child</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group mb-0">
-                                                    <button type="submit" class="btn-md btn-theme btn-4 btn-7 w-100">Book Now</button>
-                                                </div>
+                                                <input type="hidden" value="@appUser.Id" asp-for="@Model.AppUserId">
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                }
                             </div>
                         </div>
                         <!-- Recent News start -->
@@ -880,15 +827,7 @@
                             <div class="main-title-2">
                                 <h1>Video</h1>
                             </div>
-                            <iframe src="~/assets/https://www.youtube.com/embed/5e0LxrLSzok" allowfullscreen=""></iframe>
-                        </div>
-                        <!-- Latest tweet start-->
-                        <div class="sidebar-widget latest-tweet">
-                            <div class="main-title-2">
-                                <h1>Latest Tweet</h1>
-                            </div>
-                            <p><a href="~/assets/#">Lorem ipsum dolor</a> sit amet, conser adipiscing elit. Aenean id dignissim justo. Maecenas urna lacus, bibendum </p>
-                            <p>Lorem ipsum dolor<a href="~/assets/#">sit amet, conser</a> adipiscing elit. Aenean id dignissim justo. Maecenas urna lacus, bibendum quis orci </p>
+                            <iframe src="https://www.youtube.com/embed/5e0LxrLSzok" allowfullscreen=""></iframe>
                         </div>
                     </div>
                     <!-- Sidebar end -->

@@ -4,6 +4,20 @@
     Layout = null;
     int count = 0;
 }
+@{
+<style scoped>
+    .booking-flow .contact-form .sidebar-widget {
+        padding: 30px 30px 0;
+    }
+    .booking-flow .sw-2 {
+        border-bottom: none;
+    }
+    .sw-2 {
+        padding: 30px;
+        border-bottom: solid 1px #eaeaea;
+    }
+</style>
+}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -387,566 +401,178 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="stepwizard">
-                        <div class="stepwizard-row setup-panel">
-                            <div class="stepwizard-step col-xs-3">
-                                <a href="#step-1" class="btn btn-success btn-circle">
-                                    <i class="fa fa-folder-o"></i>
-                                </a>
-                                <h3>Select Room</h3>
+                    <div class="clearfix"></div>
+                    
+                    <div  id="step-4">
+                        <div class="panel-body">
+                            <h3 class="booking-heading-2">Booking Details</h3>
+                            <div class="row g-0 booling-details-box booling-details-box-2 mb-30">
+                                <div class="col-xl-7 col-lg-7 col-md-12">
+                                    <div id="carouselExampleCaptions2" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
+                                            <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                            <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                        </div>
+                                        <div class="carousel-inner">
+                                            @{
+                                                count = 0;
+                                            };
+                                            @foreach (var item in Model.Room.RoomImages.Where(x => x.IsPoster == false))
+                                            {
+                                                count++;
+                                                <div class="carousel-item @(count==1 ? "active" : "")">
+                                                    <img src="~/uploads/rooms/@item.ImageUrl" class="d-block w-100" alt="photo">
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-lg-5 col-md-12">
+                                    <div class="info">
+                                        <h4>Your Payment ID: #30211229</h4>
+                                        <ul>
+                                            <li>
+                                                <span>Check In:</span> @Model.StartRentDate.ToString("d/MM/yyyy")
+                                            </li>
+                                            <li>
+                                                <span>Check Out:</span> @Model.EndRentDate.ToString("d/MM/yyyy")
+                                            </li>
+                                            <li>
+                                                <span>Adults:</span> @Model.AdultCount
+                                            </li>
+                                            <li>
+                                                <span>Child:</span> @Model.ChildCount
+                                            </li>
+                                        </ul>
+                                        <div class="your-address">
+                                            <strong>Your Address:</strong>
+                                            <address>
+                                                <strong>@Model.Fullname</strong>
+                                                <br>
+                                                @Model.Address
+                                            </address>
+                                        </div>
+                                        <div class="price">
+                                            Total:$317.99
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="stepwizard-step col-xs-3">
-                                <a href="#step-2" class="btn btn-default btn-circle">
-                                    <i class="fa fa-user"></i>
-                                </a>
-                                <h3>Personal Info</h3>
+                            <form method="post" asp-action="order" asp-controller="room" id="cardform" asp-route-id="@Model.Room.Id">
+                                <div style="background-color: #fff;box-shadow: 0 0 5px rgb(0 0 0 / 10%);" class="sidebar-widget sw-2">
+                                    <h3 class="booking-heading-2">Card Info</h3>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group card-number">
+                                                <label asp-for="CardNumber" >Card Number</label>
+                                                <input asp-for="CardNumber" placeholder="Card Number">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group CVV">
+                                                <label asp-for="CVV" class="form-label">CVV</label>
+                                                <input asp-for="CVV" class="form-control" id="inputlastCVV" placeholder="CVV">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group Country">
+                                                <label>Expire</label>
+                                                <select asp-for="CardMonth" class="input ddl">
+                                                    <option selected>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                    <option>04</option>
+                                                    <option>05</option>
+                                                    <option>06</option>
+                                                    <option>07</option>
+                                                    <option>08</option>
+                                                    <option>09</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                </select>
+                                                <select asp-for="CardYear" class="input ddl">
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                    <option>04</option>
+                                                    <option>05</option>
+                                                    <option>06</option>
+                                                    <option>07</option>
+                                                    <option>08</option>
+                                                    <option>09</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                    <option>13</option>
+                                                    <option>14</option>
+                                                    <option>15</option>
+                                                    <option selected>16</option>
+                                                    <option>17</option>
+                                                    <option>18</option>
+                                                    <option>19</option>
+                                                    <option>20</option>
+                                                    <option>21</option>
+                                                    <option>22</option>
+                                                    <option>23</option>
+                                                    <option>24</option>
+                                                    <option>25</option>
+                                                    <option>26</option>
+                                                    <option>27</option>
+                                                    <option>28</option>
+                                                    <option>29</option>
+                                                    <option>30</option>
+                                                    <option>31</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group Country">
+                                                <label asp-for="CheckOutVM.CardYear">Year</label>
+                                                <select asp-for="CheckOutVM.CardYear" class="selectpicker country search-fields" >
+                                                    <option>2028</option>
+                                                    <option>2027</option>
+                                                    <option>2026</option>
+                                                    <option>2025</option>
+                                                    <option>2024</option>
+                                                    <option>2023</option>
+                                                    <option>2022</option>
+                                                    <option>2021</option>
+                                                    <option>2020</option>
+                                                    <option>2019</option>
+                                                    <option>2018</option>
+                                                    <option>2017</option>
+                                                    <option>2016</option>
+                                                    <option>2015</option>
+                                                    <option>2014</option>
+                                                    <option>2013</option>
+                                                    <option>2012</option>
+                                                    <option>2011</option>
+                                                    <option>2010</option>
+                                                    <option>2009</option>
+                                                    <option>2008</option>
+                                                </select>
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="col-lg-12">
+                                <div class="info-2">
+                                    <p>@Model.Room.Descreption</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl</p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.
+                                    <p class="mb-30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl, eget tempor lacus est vel Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.</p>
+                                </div>
                             </div>
-                            <div class="stepwizard-step col-xs-3">
-                                <a href="#step-3" class="btn btn-default btn-circle">
-                                    <i class="fa fa-cc"></i>
-                                </a>
-                                <h3>Payment Info</h3>
-                            </div>
-                            <div class="stepwizard-step col-xs-3">
-                                <a href="#step-4" class="btn btn-default btn-circle">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                                <h3>Review</h3>
-                            </div>
+                            <button class="btn-md btn-theme btn-4 btn-7 nextBtn pull-right" type="submit" form="cardform">confirm booking</button>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    @*<form method="post" asp-action="bookingsystem" asp-controller="home">*@
-                        <div class="panel panel-primary setup-content" id="step-1">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-                                        <h3 class="booking-heading-2">Search Your Rooms</h3>
-                                        <div class="sidebar">
-                                            <!-- Search area box 3 start -->
-                                            <div class="search-area-box-3 sidebar-widget mb-30">
-                                                <div class="search-contents">
-                                                    <div class="search-your-details">
-                                                        <div class="form-group clearfix">
-                                                            @*<input type="text" class="btn-default datepicker clearfix" placeholder="Check In">*@
-                                                            <label asp-for="StartRentDate">Start Date</label>
-                                                            <input asp-for="StartRentDate">
-                                                            <span asp-validation-for="StartRentDate"></span>
-                                                        </div>
-                                                        <div class="form-group clearfix">
-                                                            @*<input type="text" class="btn-default datepicker clearfix" placeholder="Check Out">*@
-                                                            <label asp-for="EndRentDate">End Date</label>
-                                                            <input asp-for="EndRentDate">
-                                                            <span asp-validation-for="EndRentDate"></span>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <span asp-validation-for="Type" class="text-danger"></span>
-                                                            <select asp-for="Type" class="selectpicker search-fields" asp-items="Html.GetEnumSelectList<RoomType>()">
-                                                                <option>Room</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <span asp-validation-for="AdultCount" class="text-danger"></span>
-                                                            <select asp-for="AdultCount" class="selectpicker search-fields">
-                                                                <option>Adult</option>
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <span asp-validation-for="ChildCount" class="text-danger"></span>
-                                                            <select asp-for="ChildCount" class="selectpicker search-fields">
-                                                                <option>Child</option>
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group mb-0">
-                                                            <button class="btn-md btn-theme btn-4 btn-7 w-100">Search</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Search area box 3 end -->
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-12 col-sm-12">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h3 class="booking-heading-2">Available Rooms</h3>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                @foreach (var item in Model.Rooms)
-                                                {
-                                                    <div class="hotel-box">
-                                                        <!-- Photo thumbnail -->
-                                                        <div class="photo-thumbnail">
-                                                            <div class="photo">
-                                                                <img src="~/uploads/rooms/@item.RoomImages.Where(x=>x.IsPoster==true).FirstOrDefault().ImageUrl" alt="photo" class="img-fluid w-100">
-                                                                <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">
-                                                                    <span class="blog-one__plus"></span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="pr">
-                                                                <div class="rating">
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star-half-full"></i>
-                                                                </div>
-                                                                $@item.AdultPrice/Night
-                                                            </div>
-                                                        </div>
-                                                        <!-- Detail -->
-                                                        <div class="detail clearfix">
-                                                            <h3>
-                                                                <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">@item.Type</a>
-                                                            </h3>
-                                                            <p class="location">
-                                                                <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">
-                                                                    <i class="fa fa-map-marker"></i>@item.Location
-                                                                </a>
-                                                            </p>
-                                                            <div class="fecilities">
-                                                                <ul>
-                                                                    <li>
-                                                                        <i class="flaticon-bed"></i> Beds
-                                                                    </li>
-                                                                    <li>
-                                                                        <i class="flaticon-air-conditioning"></i>
-                                                                        AC
-                                                                    </li>
-                                                                    <li>
-                                                                        <i class="flaticon-graph-line-screen"></i>
-                                                                        TV
-                                                                    </li>
-                                                                    <li>
-                                                                        <i class="flaticon-weightlifting"></i>
-                                                                        GYM
-                                                                    </li>
-                                                                    @if (item.IsWifi == true)
-                                                                    {
-                                                                        <li>
-                                                                            <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                                                            Wi-fi
-                                                                        </li>
-                                                                    }
-                                                                    else
-                                                                    {
-
-                                                                    }
-                                                                    @if (item.IsParking == true)
-                                                                    {
-                                                                        <li>
-                                                                            <i class="flaticon-parking"></i>
-                                                                            Parking
-                                                                        </li>
-                                                                    }
-                                                                    else
-                                                                    { }
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn-md btn-theme btn-4 btn-7 nextBtn pull-right" type="button">Save and continue</button>
-                            </div>
-                        </div>
-
-                    <form method="post" asp-action="CheckOut" asp-controller="room" asp-route-id="@Model.Room.Id">
-                            <div class="panel panel-primary setup-content" id="step-2">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-8 col-md-12 col-sm-12">
-                                            <h3 class="booking-heading-2 black-color">Personal Info</h3>
-                                            <div class="contact-form">
-                                                <div class="sidebar-widget">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group firstname">
-                                                                <label asp-for="Fullname" class="form-label">Full Name</label>
-                                                                <input asp-for="Fullname" class="form-control" id="inputfirstname" placeholder="Full Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-1">
-                                                                <label asp-for="Address" class="form-label">Address Line</label>
-                                                                <input asp-for="Address" class="form-control" id="inputaddress-line1" placeholder="Address Line">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-2">
-                                                                <label asp-for="City" class="form-label">City</label>
-                                                                <input asp-for="City" class="form-control" id="inputcity" placeholder="City">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-2">
-                                                                <label asp-for="ZipCode" class="form-label">Zip/Post Code</label>
-                                                                <input asp-for="ZipCode" class="form-control" id="inputcode" placeholder="Zip">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-2">
-                                                                <label for="inputstate" class="form-label">State/Region</label>
-                                                                <input type="text" name="state" class="form-control" id="inputstate" placeholder="State">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group country">
-                                                                <label asp-for="Country">Country</label>
-                                                                <select class="selectpicker country search-fields" asp-for="ZipCode">
-                                                                    <option>county</option>
-                                                                    <option>United Kingdom</option>
-                                                                    <option>Canada</option>
-                                                                    <option>Australia</option>
-                                                                    <option>France</option>
-                                                                    <option>Spain</option>
-                                                                    <option>Brazil</option>
-                                                                    <option>Bhutan</option>
-                                                                    <option>Bangladesh</option>
-                                                                    <option>India</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="sidebar-widget sw-2">
-                                                    <h3 class="booking-heading-2">Account Info</h3>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group phone-number">
-                                                                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
-                                                                <input asp-for="PhoneNumber" class="form-control" id="inputphonenumber" placeholder="Phone Number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group email">
-                                                                <label asp-for="eMail" class="form-label">Email Address</label>
-                                                                <input asp-for="eMail" class="form-control" id="inputemailaddress" placeholder="Email Address">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group password">
-                                                                <label for="inputpassword" class="form-label">Password</label>
-                                                                <input type="password" name="password" class="form-control" id="inputpassword" placeholder="Password">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group re-password">
-                                                                <label for="inputre-password" class="form-label">Re-Password</label>
-                                                                <input type="password" name="password" class="form-control" id="inputre-password" placeholder="Re-Password">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="checkbox mb-30 clearfix">
-                                                                <div class="ez-checkbox pull-left">
-                                                                    <label>
-                                                                        <input type="checkbox" class="ez-hide">
-                                                                        By Sign up you are agree with our <a href="~/assets/#">terms and condition</a>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @*<form method="post" asp-action="PaymentInfo" asp-controller="room" asp-area="" id="personalinfoform">
-                                                    
-                                                </form>*@
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12 col-sm-12">
-                                            <h3 class="booking-heading-2">Booking Details</h3>
-                                            <div class="booling-details-box">
-                                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner">
-                                                        @foreach (var item in Model.Room.RoomImages.Where(x => x.IsPoster == false))
-                                                        {
-                                                            count++;
-                                                            <div class="carousel-item @(count==1 ? "active" : "")">
-                                                                <img src="~/uploads/rooms/@item.ImageUrl" class="d-block w-100" alt="photo">
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <div class="info">
-                                                    <h4><a href="~/assets/#">Luxury Room</a></h4>
-                                                    <ul>
-                                                        <li>
-                                                            <span>Check In:</span> @Model.StartRentDate.ToString("d/MM/yyyy")
-                                                        </li>
-                                                        <li>
-                                                            <span>Check Out:</span> @Model.EndRentDate.ToString("d/MM/yyyy")
-                                                        </li>
-                                                        <li>
-                                                            <span>Rooms:</span> @Model.Type
-                                                        </li>
-                                                        <li>
-                                                            <span>Adults:</span> @Model.AdultCount
-                                                        </li>
-                                                        <li>
-                                                            <span>Child:</span> @Model.ChildCount
-                                                        </li>
-                                                    </ul>
-                                                    <div class="price">
-                                                        Total:$317.99
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn-md btn-theme btn-4 btn-7 nextBtn pull-left" type="button">Save and continue</button>
-                                </div>
-                            </div>
-                            <div class="panel panel-primary setup-content" id="step-3">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-8 col-md-12 col-xs-12">
-                                            <h3 class="booking-heading-2 black-color">Billing Address</h3>
-                                            <div class="contact-form">
-                                                <div class="sidebar-widget">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group firstname">
-                                                                <label asp-for="Fullname" class="form-label">Full Name</label>
-                                                                <input asp-for="Fullname" class="form-control" id="inputfirstname" placeholder="Full Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-1">
-                                                                <label asp-for="Address" class="form-label">Address Line</label>
-                                                                <input asp-for="Address" class="form-control" id="inputaddress-line3" placeholder="Address Line">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-2">
-                                                                <label asp-for="City" class="form-label">City</label>
-                                                                <input asp-for="City" class="form-control" id="inputcity2" placeholder="City">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group address-line-2">
-                                                                <label asp-for="ZipCode" class="form-label">Zip/Post Code</label>
-                                                                <input asp-for="ZipCode" class="form-control" id="inputcode2" placeholder="Zip">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group country">
-                                                                <label asp-for="Country">Country</label>
-                                                                <select class="selectpicker country search-fields" asp-for="Country">
-                                                                    <option>county</option>
-                                                                    <option>United Kingdom</option>
-                                                                    <option>Canada</option>
-                                                                    <option>Australia</option>
-                                                                    <option>France</option>
-                                                                    <option>Spain</option>
-                                                                    <option>Brazil</option>
-                                                                    <option>Bhutan</option>
-                                                                    <option>Bangladesh</option>
-                                                                    <option>India</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="sidebar-widget sw-2">
-                                                    <h3 class="booking-heading-2">Card Info</h3>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group card-number">
-                                                                <label for="inputcardnumber" class="form-label">Card Number</label>
-                                                                <input type="text" name="card-number" class="form-control" id="inputcardnumber" placeholder="Card Number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group CVV">
-                                                                <label for="inputlastCVV" class="form-label">CVV</label>
-                                                                <input type="text" name="last-name" class="form-control" id="inputlastCVV" placeholder="CVV">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group Country">
-                                                                <label>Expire</label>
-                                                                <select class="selectpicker country search-fields" name="Country">
-                                                                    <option>Month</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                    <option>3</option>
-                                                                    <option>4</option>
-                                                                    <option>5</option>
-                                                                    <option>6</option>
-                                                                    <option>7</option>
-                                                                    <option>8</option>
-                                                                    <option>9</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group Country">
-                                                                <label >Year</label>
-                                                                <select class="selectpicker country search-fields" name="Country">
-                                                                    <option>2021</option>
-                                                                    <option>2016</option>
-                                                                    <option>2015</option>
-                                                                    <option>2014</option>
-                                                                    <option>2013</option>
-                                                                    <option>2012</option>
-                                                                    <option>2011</option>
-                                                                    <option>2010</option>
-                                                                    <option>2009</option>
-                                                                    <option>2008</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12 col-xs-12">
-                                            <h3 class="booking-heading-2">Booking Details</h3>
-                                            <div class="booling-details-box">
-                                                <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner">
-                                                        @{
-                                                            count = 0;
-                                                        };
-                                                        @foreach (var item in Model.Room.RoomImages.Where(x => x.IsPoster == false))
-                                                        {
-                                                            count++;
-                                                            <div class="carousel-item @(count==1 ? "active" : "")">
-                                                                <img src="~/uploads/rooms/@item.ImageUrl" class="d-block w-100" alt="photo">
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <div class="info">
-                                                    <h4><a href="~/assets/#">Double Room</a></h4>
-                                                    <ul>
-                                                        <li>
-                                                            <span>Check In:</span> @Model.StartRentDate.ToString("d/MM/yyyy")
-                                                        </li>
-                                                        <li>
-                                                            <span>Check Out:</span> @Model.EndRentDate.ToString("d/MM/yyyy")
-                                                        </li>
-                                                        <li>
-                                                            <span>Rooms:</span> @Model.Type
-                                                        </li>
-                                                        <li>
-                                                            <span>Adults:</span> @Model.AdultCount
-                                                        </li>
-                                                        <li>
-                                                            <span>Child:</span> @Model.ChildCount
-                                                        </li>
-                                                    </ul>
-                                                    <div class="your-address">
-                                                        <strong>Your Address:</strong>
-                                                        <address>
-                                                            <strong>John maikel</strong>
-                                                            <br><br>
-                                                            @Model.Address
-                                                        </address>
-                                                    </div>
-                                                    <div class="price">
-                                                        Total:$317.99
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn-md btn-theme btn-4 btn-7 nextBtn pull-left" type="submit">Save and continue</button>
-                                </div>
-                            </div>
-                        </form>
-                        
-                        <div class="panel panel-primary setup-content" id="step-4">
-                            <div class="panel-body">
-                                <h3 class="booking-heading-2">Booking Details</h3>
-                                <div class="row g-0 booling-details-box booling-details-box-2 mb-30">
-                                    <div class="col-xl-7 col-lg-7 col-md-12">
-                                        <div id="carouselExampleCaptions2" class="carousel slide" data-bs-ride="carousel">
-                                            <div class="carousel-indicators">
-                                                <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                            </div>
-                                            <div class="carousel-inner">
-                                                @{count = 0;
-                                                        };
-                                                    @foreach (var item in Model.Room.RoomImages.Where(x=>x.IsPoster==false))
-                                                    {
-                                                       count++;
-                                                       <div class="carousel-item @(count==1 ? "active" : "")">
-                                                            <img src="~/uploads/rooms/@item.ImageUrl" class="d-block w-100" alt="photo">
-                                                       </div>
-                                                    }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-5 col-lg-5 col-md-12">
-                                        <div class="info">
-                                            <h4>Your Payment ID: #30211229</h4>
-                                            <ul>
-                                                <li>
-                                                    <span>Check In:</span> @Model.StartRentDate.ToString("d/MM/yyyy")
-                                                </li>
-                                                <li>
-                                                    <span>Check Out:</span> @Model.EndRentDate.ToString("d/MM/yyyy")
-                                                </li>
-                                                <li>
-                                                    <span>Adults:</span> @Model.AdultCount
-                                                </li>
-                                                <li>
-                                                    <span>Child:</span> @Model.ChildCount
-                                                </li>
-                                            </ul>
-                                            <div class="your-address">
-                                                <strong>Your Address:</strong>
-                                                <address>
-                                                    <strong>@Model.Fullname</strong>
-                                                    <br>
-                                                    @Model.Address
-                                                </address>
-                                            </div>
-                                            <div class="price">
-                                                Total:$317.99
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="info-2">
-                                        <p>@Model.Room.Descreption</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl</p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.
-                                        <p class="mb-30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl, eget tempor lacus est vel Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.</p>
-                                    </div>
-                                </div>
-                                <button class="btn-md btn-theme btn-4 btn-7 nextBtn pull-right" type="button">confirm booking</button>
-                            </div>
-                        </div>
                     @*</form>*@
                 </div>
             </div>
