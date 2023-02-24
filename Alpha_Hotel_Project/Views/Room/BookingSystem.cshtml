@@ -466,23 +466,23 @@
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group card-number">
                                                 <label asp-for="CardNumber" >Card Number</label>
-                                                <input asp-for="CardNumber" placeholder="Card Number">
+                                                <input asp-for="CardNumber" value="@Model.CardNumber" placeholder="Card Number">
                                                 <span asp-validation-for="CardNumber" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group CVV">
                                                 <label asp-for="CVV" class="form-label">CVV</label>
-                                                <input asp-for="CVV" class="form-control" id="inputlastCVV" placeholder="CVV">
+                                                <input asp-for="CVV" value="@Model.CVV" class="form-control" placeholder="CVV">
                                                 <span asp-validation-for="CVV" class="text-danger"></span>
                                             </div>
                                         </div>
-
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group Country">
                                                 <label>Expire</label>
-                                                <select asp-for="CardMonth" class="input ddl">
-                                                    <option selected>01</option>
+                                                <select asp-for="CardMonth" value="@Model.CardMonth" class="input ddl">
+                                                    <option selected>Month</option>
+                                                    <option>01</option>
                                                     <option>02</option>
                                                     <option>03</option>
                                                     <option>04</option>
@@ -496,8 +496,9 @@
                                                     <option>12</option>
                                                     <span asp-validation-for="CardMonth" class="text-danger"></span>
                                                 </select>
-                                                <select asp-for="CardYear" class="input ddl">
-                                                    <option selected>23</option>
+                                                <select asp-for="CardYear" value="@Model.CardYear" class="input ddl">
+                                                    <option selected>Year</option>
+                                                    <option>23</option>
                                                     <option>24</option>
                                                     <option>25</option>
                                                     <option>26</option>
@@ -512,7 +513,11 @@
                                                 </select>
                                             </div>
                                         </div>
-                                       
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group text-danger">
+                                                <div asp-validation-summary="ModelOnly" style="text-color:red" class="text-danger"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

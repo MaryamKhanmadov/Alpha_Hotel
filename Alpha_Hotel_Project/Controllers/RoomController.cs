@@ -57,18 +57,20 @@ namespace Alpha_Hotel_Project.Controllers
             if (!ModelState.IsValid) { return View("detail" , orderVM); }
             int Startdate = orderVM.StartRentDate.DayOfYear;
             int Enddate = orderVM.EndRentDate.DayOfYear;
+            string YearDate = orderVM.StartRentDate.ToString("yyyy");
             int DayCount = Enddate - Startdate;
             if (!ModelState.IsValid) return View("detail", orderVM);
             double TotalPrice = DayCount * (room.AdultPrice*orderVM.AdultCount + room.ChildPrice*orderVM.ChildCount);
             foreach (var item in _appDbContext.OrderItems.Include(x=>x.Order).Where(x=>x.RoomId==orderVM.Room.Id).Where(x=>x.Order!=null))
             {
+                string year = item.StartRentDate.ToString("yyyy");
                 int date = item.StartRentDate.DayOfYear;
                 int date2 = item.EndRentDate.DayOfYear;
                 for (int i = date; i <= date2; i++)
                 {
                     for (int j = Startdate; j <= Enddate; j++)
                     {
-                        if (i == j)
+                        if (i == j && YearDate==year)
                         {
                             ModelState.AddModelError("", "Already Reserved");
                             return View("detail", orderVM);
@@ -141,6 +143,33 @@ namespace Alpha_Hotel_Project.Controllers
         public async Task<IActionResult> Order(Guid id, CheckOutViewModel checkOutViewModel)
         {
             OrderItem orderItem = _appDbContext.OrderItems.FirstOrDefault(x => x.Id == id);
+            Room room = _appDbContext.Rooms.Include(x => x.RoomImages).FirstOrDefault(x => x.Id == orderItem.RoomId);
+            
+            orderItem.Room = room;
+            checkOutViewModel.OrderItem = orderItem;
+            checkOutViewModel.OrderItem.Room = orderItem.Room;
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Please , write card info");
+                return View("bookingsystem" , checkOutViewModel);
+            }
+            if (!(checkOutViewModel.CVV > 99 && checkOutViewModel.CVV < 1000))
+            {
+                ModelState.AddModelError("cvv", "Please , choice correct cvv");
+                return View("bookingsystem", checkOutViewModel);
+            }
+            int NowDateYear = int.Parse(DateTime.Now.ToString("yy"));
+            int NowDateMonth = int.Parse(DateTime.Now.ToString("MM"));
+            if ((int.Parse(checkOutViewModel.CardYear.ToString()) <= NowDateYear))
+            {
+                ModelState.AddModelError("CardYear", "Please , choice correct year");
+                return View("bookingsystem", checkOutViewModel);
+                if (int.Parse(checkOutViewModel.CardMonth.ToString()) < NowDateMonth)
+                {
+                    ModelState.AddModelError("CardMonth", "Please , choice correct Month");
+                    return View("bookingsystem", checkOutViewModel);
+                }
+            }
             Order order = new Order
             {
                 OrderItem = orderItem,

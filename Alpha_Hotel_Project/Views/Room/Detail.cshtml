@@ -618,8 +618,8 @@
                                                 <div class="col-md-12 col-sm-6">
                                                     <div class="form-group">
                                                         @*<input asp-for="StartRentDate" class="btn-default datepicker" placeholder="Check In">
-                                                    <label class="btn-default datepicker" asp-for="StartRentDate"></label>
-                                                    <span asp-validation-for="StartRentDate" style="color:red"></span>*@
+                                                        <label class="btn-default datepicker" asp-for="StartRentDate"></label>
+                                                        <span asp-validation-for="StartRentDate" style="color:red"></span>*@
                                                         <label asp-for="StartRentDate">Start Date</label>
                                                         <input asp-for="StartRentDate" value="@DateTime.Now" />
                                                         <span asp-validation-for="StartRentDate"></span>
@@ -628,8 +628,8 @@
                                                 </div>
                                                 <div class="col-md-12 col-sm-6">
                                                     <div class="form-group">
-                                                        @*<input asp-for="EndRentDate" class="btn-default datepicker" placeholder="Check Out">*@
-                                                        @*<span asp-validation-for="EndRentDate" style="color:red"></span>*@
+                                                        @*<input asp-for="EndRentDate" class="btn-default datepicker" placeholder="Check Out">
+                                                        <span asp-validation-for="EndRentDate" style="color:red"></span>*@
                                                         <label asp-for="EndRentDate">End Date</label>
                                                         <input asp-for="EndRentDate" value="@DateTime.Now" class="form-controller">
                                                         <span asp-validation-for="EndRentDate"></span>
@@ -660,7 +660,7 @@
                                                     <div class="form-group">
                                                         <span asp-validation-for="ChildCount" class="text-danger"></span>
                                                         <select asp-for="ChildCount" class="selectpicker search-fields">
-                                                            <option>Child</option>
+                                                            <option selected="selected">Child</option>
                                                             <option>0</option>
                                                             <option>1</option>
                                                             <option>2</option>
@@ -771,8 +771,8 @@
                                                 </div>
                                                 <div class="col-md-12 col-sm-6">
                                                     <div class="form-group">
-                                                        @*<input asp-for="EndRentDate" class="btn-default datepicker" placeholder="Check Out">*@
-                                                        @*<span asp-validation-for="EndRentDate" style="color:red"></span>*@
+                                                        @*<input asp-for="EndRentDate" class="btn-default datepicker" placeholder="Check Out">
+                                                        <span asp-validation-for="EndRentDate" style="color:red"></span>*@
                                                         <label asp-for="EndRentDate">End Date</label>
                                                         <input asp-for="EndRentDate" value="@DateTime.Now" class="form-controller">
                                                         <span asp-validation-for="EndRentDate" class="text-danger"></span>
