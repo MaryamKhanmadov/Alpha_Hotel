@@ -418,7 +418,7 @@
                                             @{
                                                 count = 0;
                                             };
-                                            @foreach (var item in Model.OrderItem.Room.RoomImages.Where(x => x.IsPoster == false))
+                                            @foreach (var item in Model.Room.RoomImages.Where(x => x.IsPoster == false))
                                             {
                                                 count++;
                                                 <div class="carousel-item @(count==1 ? "active" : "")">
@@ -430,7 +430,7 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-12">
                                     <div class="info">
-                                        <h4>Your Order ID: #@Model.OrderItem.Id.ToString().Substring(0,7)</h4>
+                                        <h4>Your Order ID: #@Model.OrderItem.RoomId.ToString().Substring(0,7)</h4>
                                         <ul>
                                             <li>
                                                 <span>Check In:</span> @Model.OrderItem.StartRentDate.ToString("d/MM/yyyy")
@@ -459,7 +459,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="post" asp-action="order" asp-controller="room" id="cardform" asp-route-id="@Model.OrderItem.Id">
+                            <form method="post" asp-action="order" asp-controller="room" id="cardform" >
                                 <div style="background-color: #fff;box-shadow: 0 0 5px rgb(0 0 0 / 10%);" class="sidebar-widget sw-2">
                                     <h3 class="booking-heading-2">Card Info</h3>
                                     <div class="row">
@@ -479,10 +479,10 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group Country">
-                                                <label>Expire</label>
+                                                <label asp-for="CardMonth">Month</label>
                                                 <select asp-for="CardMonth" value="@Model.CardMonth" class="input ddl">
-                                                    <option selected>Month</option>
-                                                    <option>01</option>
+                                                    <option>Month</option>
+                                                    <option selected>01</option>
                                                     <option>02</option>
                                                     <option>03</option>
                                                     <option>04</option>
@@ -496,9 +496,10 @@
                                                     <option>12</option>
                                                     <span asp-validation-for="CardMonth" class="text-danger"></span>
                                                 </select>
+                                                <label asp-for="CardYear">Year</label>
                                                 <select asp-for="CardYear" value="@Model.CardYear" class="input ddl">
-                                                    <option selected>Year</option>
-                                                    <option>23</option>
+                                                    <option>Year</option>
+                                                    <option selected>23</option>
                                                     <option>24</option>
                                                     <option>25</option>
                                                     <option>26</option>
@@ -525,7 +526,7 @@
 
                             <div class="col-lg-12">
                                 <div class="info-2">
-                                    <p>@Model.OrderItem.Room.Descreption</p>
+                                    <p>@Model.Room.Descreption</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl</p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.
                                     <p class="mb-30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl, eget tempor lacus est vel Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.</p>

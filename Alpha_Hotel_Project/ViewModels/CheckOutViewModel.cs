@@ -6,11 +6,12 @@ namespace Alpha_Hotel_Project.ViewModels
 {
     public class CheckOutViewModel
     {
-        public OrderItem? OrderItem { get; set; }
+        public OrderItem OrderItem { get; set; }
+        public Room Room { get; set; }
         public Guid? OrderItemId { get; set; }
-        public string CardNumber { get; set; }
-        public int CardMonth { get; set; }
-        public int CardYear { get; set; }
-        public int CVV { get; set; }
+        public string? CardNumber { get; set; }
+        public int? CardMonth { get; set; }
+        public int? CardYear { get; set; }
+        public int? CVV { get; set; }
     }
 }
