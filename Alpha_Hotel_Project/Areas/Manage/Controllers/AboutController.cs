@@ -19,11 +19,8 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         }
         public IActionResult Index()
         {
-            HomeViewModel homeViewModel = new HomeViewModel
-            {
-                Abouts = _appDbContext.Abouts.Where(x=>x.IsDeleted==false).ToList()
-            };
-            return View(homeViewModel);
+            List<About> abouts = _appDbContext.Abouts.Where(x => x.IsDeleted == false).ToList();
+            return View(abouts);
         }
         public IActionResult Create()
         {

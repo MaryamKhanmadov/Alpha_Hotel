@@ -1,6 +1,6 @@
-using Alpha_Hotel_Project.Areas.Manage.Services;
 using Alpha_Hotel_Project.Data;
 using Alpha_Hotel_Project.Models;
+using Alpha_Hotel_Project.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -31,7 +31,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 
     opt.User.RequireUniqueEmail = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-builder.Services.AddScoped<LayoutService>();
+builder.Services.AddScoped<UserSettingService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

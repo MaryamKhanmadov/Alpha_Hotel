@@ -1,4 +1,7 @@
-﻿@model HomeViewModel
+﻿@inject Alpha_Hotel_Project.Services.UserSettingService service;
+@{
+    List<Setting> settings = await service.GetSettingsAsnyc();
+}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -57,151 +60,12 @@
     <!-- End Google Tag Manager (noscript) -->
     <div class="page_loader"></div>
 
-    <!-- Option Panel -->
-    <div class="option-panel option-panel-collased">
-        <h2>Change Color</h2>
-        <div class="color-plate sandybrown-plate" data-color="sandybrown"></div>
-        <div class="color-plate blue-light-2-plate" data-color="blue-light-2"></div>
-        <div class="color-plate yellow-plate" data-color="yellow"></div>
-        <div class="color-plate red-plate" data-color="red"></div>
-        <div class="color-plate green-light-plate" data-color="green-light"></div>
-        <div class="color-plate purple-plate" data-color="purple"></div>
-        <div class="color-plate blue-plate" data-color="blue"></div>
-        <div class="color-plate peru-plate" data-color="peru"></div>
-        <div class="color-plate green-plate" data-color="green"></div>
-        <div class="color-plate blue-light-plate" data-color="blue-light"></div>
-        <div class="color-plate green-light-2-plate" data-color="green-light-2"></div>
-        <div class="color-plate royalblue-plate" data-color="royalblue"></div>
-        <div class="setting-button">
-            <i class="fa fa-gear"></i>
-        </div>
-    </div>
-    <!-- /Option Panel -->
     @*@await Html.PartialAsync("_TopHeaderPartialView")*@
     <!-- Main header start -->
     @*@{
         Html.RenderPartial("_MainHeaderPartialView");
     }*@
-    @*<header class="main-header" id="main-header-2">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand logos" href="index.html">
-                    <img src="~/assets/img/logos/logo.png" alt="logo" class="logo-photo">
-                    <img src="~/assets/img/logos/white-logo.png" alt="logo" class="logo-photo2">
-                </a>
-                <button class="navbar-toggler" id="drawer" type="button">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="navbar-collapse collapse w-100 justify-content-end" id="navbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Index
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="index.html">Index 1</a></li>
-                                <li><a class="dropdown-item" href="index-2.html">Index 2</a></li>
-                                <li><a class="dropdown-item" href="index-3.html">Index 3</a></li>
-                                <li><a class="dropdown-item" href="index-4.html">Index 4</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Rooms
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                <li><a class="dropdown-item" href="rooms-col-1.html">Rooms 1 Column</a></li>
-                                <li><a class="dropdown-item" href="rooms-col-2.html">Rooms 2 Column</a></li>
-                                <li><a class="dropdown-item" href="rooms-col-3.html">Rooms 3 Column</a></li>
-                                <li><a class="dropdown-item" href="rooms-details.html">Rooms Details 1</a></li>
-                                <li><a class="dropdown-item" href="rooms-details-2.html">Rooms Details 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pages
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Gallery</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="gallery-3column.html">Gallery 3 Column</a></li>
-                                        <li><a class="dropdown-item" href="gallery-4column.html">Gallery 4 Column</a></li>
-                                        <li><a class="dropdown-item" href="gallery-masonry.html">Gallery Masonry</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">About Us</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="about.html">About Us 1</a></li>
-                                        <li><a class="dropdown-item" href="about-2.html">About Us 2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="booking-system.html">Booking System</a>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Staff</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="staff.html">Staff 1</a></li>
-                                        <li><a class="dropdown-item" href="staff-2.html">Staff 2</a></li>
-                                        <li><a class="dropdown-item" href="staff-3.html">Staff 3</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Events</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="events.html">Events 1</a></li>
-                                        <li><a class="dropdown-item" href="events-right-sidebar.html">Events 2</a></li>
-                                        <li><a class="dropdown-item" href="events-details.html">Events Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="pricing-tables.html">Pricing Tables</a>
-                                <li><a class="dropdown-item" href="typography.html">Typography</a>
-                                <li><a class="dropdown-item" href="faq.html">Faq</a>
-                                <li><a class="dropdown-item" href="login.html">Login</a>
-                                <li><a class="dropdown-item" href="signup.html">Sigup</a>
-                                <li><a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-                                <li><a class="dropdown-item" href="404.html">404 Error</a>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Blog
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5">
-                                <li><a class="dropdown-item" href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                <li><a class="dropdown-item" href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                <li><a class="dropdown-item" href="blog-full-width.html">Blog Fullwidth</a></li>
-                                <li><a class="dropdown-item" href="blog-creative.html">Blog Creative</a></li>
-                                <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Contact
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
-                                <li><a class="dropdown-item" href="contact.html">Contact 1</a></li>
-                                <li><a class="dropdown-item" href="contact-2.html">Contact 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="booking-system.html" class="btn-lg btn-4 btn-6">Booking System</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="row">
-                <div class="header-search animated fadeInDown">
-                    <form class="form-inline">
-                        <input type="text" class="form-control" id="searchKey" placeholder="Search...">
-                        <div class="search-btns">
-                            <button type="submit" class="btn btn-default">Search</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </header>*@
+
     <!-- Main header end -->
     <!-- Sidenav start -->
     <nav id="sidebar" class="nav-sidebar sidebar-heading-section">
@@ -211,7 +75,7 @@
         </div>
         <div class="sidebar-inner">
             <div class="sidebar-logo">
-                <img src="~/assets/img/logos/@Model.Settings.FirstOrDefault(x=>x.Key == "Logo")?.Value" alt="sidebarlogo">
+                <img src="~/assets/img/logos/@settings.FirstOrDefault(x=>x.Key == "Logo")?.Value" alt="sidebarlogo">
             </div>
             <div class="sidebar-navigation">
                 <h3 class="heading">Pages</h3>
@@ -305,7 +169,7 @@
                         <i class="fa fa-phone"></i>
                     </div>
                     <div class="body-info">
-                        <a href="tel:@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
+                        <a href="tel:@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
                     </div>
                 </div>
                 <div class="sidebar-contact-info">
@@ -313,7 +177,7 @@
                         <i class="fa fa-envelope"></i>
                     </div>
                     <div class="body-info">
-                        <a href="#">@Model.Settings.FirstOrDefault(x=>x.Key == "Email")?.Value</a>
+                        <a href="#">@settings.FirstOrDefault(x=>x.Key == "Email")?.Value</a>
                     </div>
                 </div>
                 <div class="sidebar-contact-info mb-0">
@@ -321,22 +185,22 @@
                         <i class="fa fa-fax"></i>
                     </div>
                     <div class="body-info">
-                        <a href="tel:@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
+                        <a href="tel:@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
                     </div>
                 </div>
             </div>
             <div class="get-social">
                 <h3 class="heading">Get Social</h3>
-                <a @Model.Settings.FirstOrDefault(x=>x.Key == "FacebookUrl")?.Value class="facebook-bg">
+                <a @settings.FirstOrDefault(x=>x.Key == "FacebookUrl")?.Value class="facebook-bg">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a @Model.Settings.FirstOrDefault(x=>x.Key == "TwitterUrl")?.Value class="twitter-bg">
+                <a @settings.FirstOrDefault(x=>x.Key == "TwitterUrl")?.Value class="twitter-bg">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a @Model.Settings.FirstOrDefault(x=>x.Key == "GoogleUrl")?.Value class="google-bg">
+                <a @settings.FirstOrDefault(x=>x.Key == "GoogleUrl")?.Value class="google-bg">
                     <i class="fa fa-google"></i>
                 </a>
-                <a @Model.Settings.FirstOrDefault(x=>x.Key == "LinkedinUrl")?.Value class="linkedin-bg">
+                <a @settings.FirstOrDefault(x=>x.Key == "LinkedinUrl")?.Value class="linkedin-bg">
                     <i class="fa fa-linkedin"></i>
                 </a>
             </div>
@@ -362,19 +226,19 @@
                             <ul class="personal-info">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    Address: @Model.Settings.FirstOrDefault(x=>x.Key == "Address")?.Value
+                                    Address: @settings.FirstOrDefault(x=>x.Key == "Address")?.Value
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    Email:<a href="@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Email")?.Value</a>
+                                    Email:<a href="@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@settings.FirstOrDefault(x=>x.Key == "Email")?.Value</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-phone"></i>
-                                    Phone: <a href="@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
+                                    Phone: <a href="@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-fax"></i>
-                                    Fax: @Model.Settings.FirstOrDefault(x=>x.Key == "Fax")?.Value
+                                    Fax: @settings.FirstOrDefault(x=>x.Key == "Fax")?.Value
                                 </li>
                             </ul>
                         </div>
@@ -448,16 +312,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <p> &copy;  2021 <a href="@Model.Settings.FirstOrDefault(x=>x.Key == "CopyrightUrl")?.Value" target="_blank">Theme Vessel</a>. All Rights Reserved.</p>
+                        <p> &copy;  2021 <a href="@settings.FirstOrDefault(x=>x.Key == "CopyrightUrl")?.Value" target="_blank">Theme Vessel</a>. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="clearfix"></div>
                         <ul class="social-list">
-                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "TwitterUrl")?.Value class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "FacebookUrl")?.Value class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "PinterestUrl")?.Value class="rss-bg"><i class="fa fa-rss"></i></a></li>
-                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "GoogleUrl")?.Value class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "LinkedinUrl")?.Value class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="@settings.FirstOrDefault(x=>x.Key == "TwitterUrl")?.Value" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="@settings.FirstOrDefault(x=>x.Key == "FacebookUrl")?.Value" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="@settings.FirstOrDefault(x=>x.Key == "PinterestUrl")?.Value" class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="@settings.FirstOrDefault(x=>x.Key == "GoogleUrl")?.Value" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="@settings.FirstOrDefault(x=>x.Key == "LinkedinUrl")?.Value" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
                     </div>
                 </div>

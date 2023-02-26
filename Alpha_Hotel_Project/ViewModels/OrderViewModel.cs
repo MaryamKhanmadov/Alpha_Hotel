@@ -27,7 +27,7 @@ namespace Alpha_Hotel_Project.ViewModels
         [Required]
         [StringLength(maximumLength: 100)]
         public string Address { get; set; }
-        public RoomType Type { get; set; }
+        //public RoomType Type { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

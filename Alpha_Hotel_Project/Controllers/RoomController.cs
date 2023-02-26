@@ -1,4 +1,5 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 //using Alpha_Hotel_Project.Migrations;
 using Alpha_Hotel_Project.Models;
 using Alpha_Hotel_Project.ViewModels;
@@ -23,6 +24,18 @@ namespace Alpha_Hotel_Project.Controllers
             _userManager = userManager;
         }
         [HttpGet]
+        public IActionResult Index(int page=1)
+        {
+            List<Partner> partners = _appDbContext.Partners.ToList();
+            var query = _appDbContext.Rooms.Include(x => x.RoomImages).Where(x => x.IsDeleted == false).AsQueryable();
+            RoomViewModel roomViewModel = new RoomViewModel
+            {
+                Partners = partners,
+                Rooms = PaginatedList<Room>.Create(query, 4, page)
+            };
+            return View(roomViewModel);
+        }
+        [HttpGet]
         public async Task<IActionResult> Detail(Guid id)
         {
             AppUser member = null;
@@ -42,6 +55,13 @@ namespace Alpha_Hotel_Project.Controllers
             if (room is null) return View("Error");
             _appDbContext.SaveChanges();
             return View(orderViewModel);
+        }
+        [HttpGet]
+        public IActionResult AllRooms(int page=1)
+        {
+            var query = _appDbContext.Rooms.Include(x => x.RoomImages).Include(x => x.Category).Where(x => x.IsDeleted == false);
+            PaginatedList<Room> rooms = PaginatedList<Room>.Create(query, 4, page);
+            return View(rooms);
         }
         [HttpPost]
         public async Task<IActionResult> BookingSystem(Guid id, OrderViewModel orderVM)
@@ -127,7 +147,7 @@ namespace Alpha_Hotel_Project.Controllers
                 eMail = orderVM.eMail,
                 AdultCount = orderVM.AdultCount,
                 ChildCount = orderVM.ChildCount,
-                Type = orderVM.Type,
+                Type = room.Type,
                 StartRentDate = orderVM.StartRentDate,
                 EndRentDate = orderVM.EndRentDate,
                 AppUserId = member?.Id,

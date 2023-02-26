@@ -1,17 +1,29 @@
 ﻿@using Alpha_Hotel_Project.Helpers
-@model PaginatedList<Staff>
+@model StaffViewModel
 <!-- Sub banner start -->
 @await Html.PartialAsync("_TopHeaderPartialView")
 
 @await Html.PartialAsync("_MainHeaderPartialView")
 
-@await Html.PartialAsync("_BannerPartialView")
+<div class="sub-banner">
+    <div class="container">
+        <div class="breadcrumb-area">
+            <h1>Our Staff</h1>
+        </div>
+        <nav class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">Home</a></li>
+                <li class="breadcrumb-item active">Our Staff</li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <!-- Sub Banner end -->
 <!-- staff section start -->
 <div class="content-area staff-section">
     <div class="container">
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Staffs)
             {
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="staff-box-1">
@@ -47,20 +59,20 @@
         <div class="pagination-box">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    @if (Model.HasPrevious)
+                    @if (Model.Staffs.HasPrevious)
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-route-page="@(Model.ActivePage-1)"><i class="fa fa-angle-left"></i></a>
+                            <a class="page-link" asp-route-page="@(Model.Staffs.ActivePage-1)"><i class="fa fa-angle-left"></i></a>
                         </li>
                     }
-                    @for (int i = 1; i <= Model.TotalPageCount; i++)
+                    @for (int i = 1; i <= Model.Staffs.TotalPageCount; i++)
                     {
-                        <li class="page-item"><a class="page-link  @((Model.ActivePage==i)? "active" : "") " asp-route-page="@i">@i</a></li>
+                        <li class="page-item"><a class="page-link  @((Model.Staffs.ActivePage==i)? "active" : "") " asp-route-page="@i">@i</a></li>
                     }
-                    @if (Model.HasNext)
+                    @if (Model.Staffs.HasNext)
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-route-page="@((Model.ActivePage+1))">
+                            <a class="page-link" asp-route-page="@((Model.Staffs.ActivePage+1))">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -74,24 +86,5 @@
 </div>
 <!-- staff section end -->
 <!-- Partners strat -->
-<div class="partners bg-white">
-    <div class="container">
-        <h4>Brands <span>$ Partners</span></h4>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="custom-slider slide-box-btn">
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-1.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-2.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-3.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-4.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-5.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-6.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-1.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-2.png" alt="brand"></div>
-                    <div class="custom-box"><img src="~/assets/img/brand/brand-3.png" alt="brand"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@await Html.PartialAsync("_PartnerPartialView" , Model.Partners)
 <!-- Partners end -->

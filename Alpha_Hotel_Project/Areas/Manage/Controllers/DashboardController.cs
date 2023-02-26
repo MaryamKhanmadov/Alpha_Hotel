@@ -29,7 +29,8 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                 OrderItems = _appDbContext.OrderItems.Include(x=>x.Order).ToList(),
                 Orders = _appDbContext.Orders.Include(x => x.OrderItem).ToList(),
                 AppUsers = _appDbContext.Users.ToList(),
-                RecentOrders = _appDbContext.Orders.Include(x => x.OrderItem).Where(x => x.OrderStatus == 0).Take(5).ToList()
+                RecentOrders = _appDbContext.Orders.Include(x => x.OrderItem).OrderByDescending(x => x.CreateDate).Where(x => x.OrderStatus == 0).Take(5).ToList(),
+                ContactMessages = _appDbContext.ContactMessages.OrderByDescending(x=>x.MessageTime).Take(3).ToList()
             };
             return View(dashboardViewModel);
         }

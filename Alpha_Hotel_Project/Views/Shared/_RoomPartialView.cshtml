@@ -6,20 +6,16 @@
             <!-- Photo thumbnail -->
             <div class="photo-thumbnail">
                 <div class="photo">
-                    <img src="~/uploads/rooms/@item.RoomImages.FirstOrDefault(x=>x.IsPoster==true).ImageUrl" alt="photo" class="img-fluid w-100">
+                    <img style="height:275px;width:415px" src="~/uploads/rooms/@item.RoomImages.FirstOrDefault(x=>x.IsPoster==true).ImageUrl" alt="photo" class="img-fluid w-100">
                     <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">
                         <span class="blog-one__plus"></span>
                     </a>
                 </div>
                 <div class="pr">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-full"></i>
+                    <div style="font-size: 15px;" class="rating">
+                        <i class="fa fa-eye">@item.ViewCount</i>
                     </div>
-                    $@item.AdultPrice/Night
+                    $@item.AdultPrice.ToString("0.00")/Night
                 </div>
             </div>
             <!-- Detail -->
