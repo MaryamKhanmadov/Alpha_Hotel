@@ -1,4 +1,5 @@
-﻿@model List<Room>
+﻿@using Alpha_Hotel_Project.Helpers
+@model PaginatedList<Room>
 @{
     int count = 0;
 }
@@ -49,4 +50,33 @@
             </table>
         </div>
     </div>
+</div>
+
+<div class="d-flex justify-content-center my-3">
+    <form>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.HasPrevious)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-route-page="@(Model.ActivePage-1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPageCount; i++)
+                {
+                    <li class="page-item @((Model.ActivePage==i)? "active" : "")"><a class="page-link  " asp-route-page="@i">@i</a></li>
+                }
+                @if (Model.HasNext)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-route-page="@((Model.ActivePage+1))" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </form>
 </div>

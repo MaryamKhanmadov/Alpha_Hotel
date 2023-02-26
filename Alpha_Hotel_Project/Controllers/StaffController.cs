@@ -1,4 +1,5 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,10 @@ namespace Alpha_Hotel_Project.Controllers
         {
             _appDbContext = appDbContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<Staff> staffs = _appDbContext.Staffs.Include(x => x.Profession).Where(x => x.IsDeleted == false).ToList();
+            var query = _appDbContext.Staffs.Include(x => x.Profession).Where(x => x.IsDeleted == false).AsQueryable();
+            PaginatedList<Staff> staffs = PaginatedList<Staff>.Create(query, 4, page);
             return View(staffs);
         }
     }

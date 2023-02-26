@@ -3,6 +3,7 @@ using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Alpha_Hotel_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alpha_Hotel_Project.Areas.Manage.Controllers
@@ -18,13 +19,11 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             _appDbContext = appDbContext;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            HomeViewModel homeViewModel = new HomeViewModel
-            {
-                Staffs = _appDbContext.Staffs.Include(x => x.Profession).Where(x => x.IsDeleted == false).ToList()
-            };
-            return View(homeViewModel);
+            var query = _appDbContext.Staffs.Include(x => x.Profession).Where(x => x.IsDeleted == false).AsQueryable();
+            PaginatedList<Staff> staffs = PaginatedList<Staff>.Create(query, 5, page);
+            return View(staffs);
         }
         public IActionResult Create()
         {

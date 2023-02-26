@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model HomeViewModel
+<!DOCTYPE html>
 <html lang="zxx">
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2023 14:02:40 GMT -->
@@ -210,7 +211,7 @@
         </div>
         <div class="sidebar-inner">
             <div class="sidebar-logo">
-                <img src="~/assets/img/logos/logo.png" alt="sidebarlogo">
+                <img src="~/assets/img/logos/@Model.Settings.FirstOrDefault(x=>x.Key == "Logo")?.Value" alt="sidebarlogo">
             </div>
             <div class="sidebar-navigation">
                 <h3 class="heading">Pages</h3>
@@ -304,7 +305,7 @@
                         <i class="fa fa-phone"></i>
                     </div>
                     <div class="body-info">
-                        <a href="tel:0477-0477-8556-552">0477 8556 552</a>
+                        <a href="tel:@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
                     </div>
                 </div>
                 <div class="sidebar-contact-info">
@@ -312,7 +313,7 @@
                         <i class="fa fa-envelope"></i>
                     </div>
                     <div class="body-info">
-                        <a href="#">info@themevessel.com</a>
+                        <a href="#">@Model.Settings.FirstOrDefault(x=>x.Key == "Email")?.Value</a>
                     </div>
                 </div>
                 <div class="sidebar-contact-info mb-0">
@@ -320,22 +321,22 @@
                         <i class="fa fa-fax"></i>
                     </div>
                     <div class="body-info">
-                        <a href="tel:0477-0477-8556-552">0266 8556 787</a>
+                        <a href="tel:@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
                     </div>
                 </div>
             </div>
             <div class="get-social">
                 <h3 class="heading">Get Social</h3>
-                <a href="#" class="facebook-bg">
+                <a @Model.Settings.FirstOrDefault(x=>x.Key == "FacebookUrl")?.Value class="facebook-bg">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a href="#" class="twitter-bg">
+                <a @Model.Settings.FirstOrDefault(x=>x.Key == "TwitterUrl")?.Value class="twitter-bg">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a href="#" class="google-bg">
+                <a @Model.Settings.FirstOrDefault(x=>x.Key == "GoogleUrl")?.Value class="google-bg">
                     <i class="fa fa-google"></i>
                 </a>
-                <a href="#" class="linkedin-bg">
+                <a @Model.Settings.FirstOrDefault(x=>x.Key == "LinkedinUrl")?.Value class="linkedin-bg">
                     <i class="fa fa-linkedin"></i>
                 </a>
             </div>
@@ -361,19 +362,19 @@
                             <ul class="personal-info">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    Address: 44 New Design Street,
+                                    Address: @Model.Settings.FirstOrDefault(x=>x.Key == "Address")?.Value
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    Email:<a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                                    Email:<a href="@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Email")?.Value</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-phone"></i>
-                                    Phone: <a href="tel:+55-417-634-7071">+0477 85X6 552</a>
+                                    Phone: <a href="@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value">@Model.Settings.FirstOrDefault(x=>x.Key == "Phone")?.Value</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-fax"></i>
-                                    Fax: +0477 85X6 552
+                                    Fax: @Model.Settings.FirstOrDefault(x=>x.Key == "Fax")?.Value
                                 </li>
                             </ul>
                         </div>
@@ -447,16 +448,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <p> &copy;  2021 <a href="http://themevessel.com/" target="_blank">Theme Vessel</a>. All Rights Reserved.</p>
+                        <p> &copy;  2021 <a href="@Model.Settings.FirstOrDefault(x=>x.Key == "CopyrightUrl")?.Value" target="_blank">Theme Vessel</a>. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="clearfix"></div>
                         <ul class="social-list">
-                            <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-                            <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "TwitterUrl")?.Value class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "FacebookUrl")?.Value class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "PinterestUrl")?.Value class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "GoogleUrl")?.Value class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a @Model.Settings.FirstOrDefault(x=>x.Key == "LinkedinUrl")?.Value class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
                     </div>
                 </div>

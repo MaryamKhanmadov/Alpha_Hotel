@@ -25,10 +25,10 @@
             <!-- Detail -->
             <div class="detail clearfix">
                 <h3>
-                    <a href="rooms-details.html">@item.Name</a>
+                    <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">@item.Name</a>
                 </h3>
                 <p class="location">
-                    <a href="rooms-details.html">
+                    <a asp-action="detail" asp-controller="room" asp-area="" asp-route-id="@item.Id">
                         <i class="fa fa-map-marker"></i>@item.Location
                     </a>
                 </p>

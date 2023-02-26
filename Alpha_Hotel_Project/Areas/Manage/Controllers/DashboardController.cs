@@ -1,7 +1,10 @@
-﻿using Alpha_Hotel_Project.Models;
+﻿using Alpha_Hotel_Project.Areas.Manage.ViewModels;
+using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alpha_Hotel_Project.Areas.Manage.Controllers
 {
@@ -11,15 +14,24 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AppDbContext _appDbContext;
 
-        public DashboardController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        public DashboardController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager , AppDbContext appDbContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _appDbContext = appDbContext;
         }
         public IActionResult Index()
         {
-            return View();
+            DashboardViewModel dashboardViewModel = new DashboardViewModel
+            {
+                OrderItems = _appDbContext.OrderItems.Include(x=>x.Order).ToList(),
+                Orders = _appDbContext.Orders.Include(x => x.OrderItem).ToList(),
+                AppUsers = _appDbContext.Users.ToList(),
+                RecentOrders = _appDbContext.Orders.Include(x => x.OrderItem).Where(x => x.OrderStatus == 0).Take(5).ToList()
+            };
+            return View(dashboardViewModel);
         }
         //public async Task<IActionResult> CreateAdmin()
         //{

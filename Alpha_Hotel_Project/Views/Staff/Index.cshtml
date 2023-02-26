@@ -1,4 +1,5 @@
-﻿@model List<Staff>
+﻿@using Alpha_Hotel_Project.Helpers
+@model PaginatedList<Staff>
 <!-- Sub banner start -->
 @await Html.PartialAsync("_TopHeaderPartialView")
 
@@ -42,24 +43,33 @@
 
             }
         </div>
-
         <!-- Page navigation start -->
         <div class="pagination-box">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                    </li>
-                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="staff-2.html">2</a></li>
-                    <li class="page-item"><a class="page-link" href="staff-3.html">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="staff-2.html"><i class="fa fa-angle-right"></i></a>
-                    </li>
+                    @if (Model.HasPrevious)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-route-page="@(Model.ActivePage-1)"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.TotalPageCount; i++)
+                    {
+                        <li class="page-item"><a class="page-link  @((Model.ActivePage==i)? "active" : "") " asp-route-page="@i">@i</a></li>
+                    }
+                    @if (Model.HasNext)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-route-page="@((Model.ActivePage+1))">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </nav>
         </div>
         <!-- Page navigation end -->
+        
     </div>
 </div>
 <!-- staff section end -->

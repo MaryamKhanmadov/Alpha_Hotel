@@ -13,5 +13,9 @@ namespace Alpha_Hotel_Project.ViewModels
         public List<Room> Rooms { get; set; }
         public List<RoomImage> RoomImages { get; set; }
         public List<Category> Categories { get; set; }
+        public List<Setting> Settings { get; set; }
+        public List<Blog> Blogs { get; set; }
+        public List<BlogComment> BlogComments { get; set; }
+        public List<BlogCategory> BlogCategories { get; set; }
     }
 }

@@ -10,27 +10,29 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
     [Area("Manage")]
     public class RoomController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _env;
 
         public RoomController(AppDbContext context, IWebHostEnvironment env)
         {
-            _context = context;
+            _appDbContext = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View(_context.Rooms.Include(x => x.Category).Include(x => x.RoomImages).ToList());
+            var query = _appDbContext.Rooms.Include(x => x.Category).Include(x => x.RoomImages).AsQueryable();
+            PaginatedList<Room> rooms = PaginatedList<Room>.Create(query, 5, page);
+            return View(rooms);
         }
         public IActionResult Create()
         {
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _appDbContext.Categories.ToList();
             return View();
         }
         [HttpPost]
         public IActionResult Create(Room room)
         {
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _appDbContext.Categories.ToList();
 
             if (!ModelState.IsValid) return View(room);
 
@@ -53,7 +55,7 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                     IsPoster = false
                 };
 
-                _context.RoomImages.Add(roomImage);
+                _appDbContext.RoomImages.Add(roomImage);
             }
 
             if (room.PosterImageFile is null)
@@ -78,18 +80,18 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                 ImageUrl = room.PosterImageFile.SaveFile(_env.WebRootPath, "uploads/rooms"),
                 IsPoster = true
             };
-            _context.RoomImages.Add(posterImage);
+            _appDbContext.RoomImages.Add(posterImage);
 
-            _context.Rooms.Add(room);
-            _context.SaveChanges();
+            _appDbContext.Rooms.Add(room);
+            _appDbContext.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Update(Guid id)
         {
-            ViewBag.Categories = _context.Categories.ToList();
-            Room room = _context.Rooms.Include(x => x.RoomImages).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+            ViewBag.Categories = _appDbContext.Categories.ToList();
+            Room room = _appDbContext.Rooms.Include(x => x.RoomImages).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
             if (room is null) return View("Error");
             return View(room);
         }
@@ -97,9 +99,9 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Update(Room room)
         {
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _appDbContext.Categories.ToList();
             if (!ModelState.IsValid) return View(room);
-            Room existroom = _context.Rooms.Include(x => x.RoomImages).Include(x=>x.Category).FirstOrDefault(x => x.Id == room.Id);
+            Room existroom = _appDbContext.Rooms.Include(x => x.RoomImages).Include(x=>x.Category).FirstOrDefault(x => x.Id == room.Id);
             if (existroom is null) return View("Error");
 
             List<RoomImage> ImagesDelet = existroom.RoomImages.FindAll(ai => !room.RoomImageIds.Contains(ai.Id) && ai.IsPoster is false);
@@ -107,14 +109,14 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             {
                 string path = Path.Combine(_env.WebRootPath, "uploads/rooms", item.ImageUrl);
                 System.IO.File.Delete(path);
-                //_context.RoomImages.Remove(item);
+                //_appDbContext.RoomImages.Remove(item);
             }
             existroom.RoomImages.RemoveAll(ai => !room.RoomImageIds.Contains(ai.Id) && ai.IsPoster is false);
 
 
             if (room.ImageFiles is not null)
             {
-                //List<RoomImage> oldbookimages = _context.RoomImages.Where(x => x.RoomId == room.Id).Where(x => x.IsPoster == false).ToList();
+                //List<RoomImage> oldbookimages = _appDbContext.RoomImages.Where(x => x.RoomId == room.Id).Where(x => x.IsPoster == false).ToList();
 
                 foreach (IFormFile image in room.ImageFiles)
                 {
@@ -136,7 +138,7 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                         IsPoster = false
                     };
 
-                    _context.RoomImages.Add(roomImages);
+                    _appDbContext.RoomImages.Add(roomImages);
                 }
             }
             if (room.PosterImageFile is not null)
@@ -159,7 +161,7 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                     {
                         string path = Path.Combine(_env.WebRootPath, "uploads/rooms", item.ImageUrl);
                         System.IO.File.Delete(path);
-                        _context.Remove(item);
+                        _appDbContext.Remove(item);
                     }
                 }
 
@@ -169,7 +171,7 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                     IsPoster = true,
                     RoomId = room.Id
                 };
-                _context.RoomImages.Add(PosterImage);
+                _appDbContext.RoomImages.Add(PosterImage);
             }
 
             existroom.Descreption = room.Descreption;
@@ -184,21 +186,21 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             existroom.Type = room.Type;
             existroom.Name = room.Name;
 
-            _context.SaveChanges();
+            _appDbContext.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult Delete(Guid id)
         {
-            Room room = _context.Rooms.Find(id);
+            Room room = _appDbContext.Rooms.Find(id);
             if (room is null) return NotFound();
 
-            foreach (RoomImage image in _context.RoomImages.Where(x => x.RoomId == id))
+            foreach (RoomImage image in _appDbContext.RoomImages.Where(x => x.RoomId == id))
             {
                 if (System.IO.File.Exists(Path.Combine(_env.WebRootPath, "uploads/rooms", image.ImageUrl)))
                     System.IO.File.Delete(Path.Combine(_env.WebRootPath, "uploads/rooms", image.ImageUrl));
             }
-            _context.Rooms.Remove(room);
-            _context.SaveChanges();
+            _appDbContext.Rooms.Remove(room);
+            _appDbContext.SaveChanges();
 
             return Ok();
         }

@@ -21,5 +21,9 @@ namespace Alpha_Hotel_Project.Data
         public DbSet<RoomImage> RoomImages { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
     }
 }

@@ -660,118 +660,31 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
         </div>
         <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-            <div class="item slide-box">
-                <div class="blog-1">
-                    <div class="blog-image">
-                        <img src="~/assets/img/blog/img-5.jpg" alt="image" class="img-fluid w-100">
-                        <div class="profile-user">
-                            <img src="~/assets/img/avatar/avatar-1.jpg" alt="user">
+            @foreach (var item in Model.Blogs)
+            {
+                <div class="item slide-box">
+                    <div class="blog-1">
+                        <div class="blog-image">
+                            <img src="~/uploads/blogs/@item.ImageUrl" alt="image" class="img-fluid w-100">
+                            <div class="date-box">
+                                <span>@item.CreateDate.ToString("dd")</span>@item.CreateDate.ToString("MMM")
+                            </div>
                         </div>
-                        <div class="date-box">
-                            <span>09</span>Sep
+                        <div class="detail">
+                            <div class="post-meta clearfix">
+                                <ul>
+                                    <li class="float-right mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>@item.BlogComments.Count</li>
+                                    <li class="float-right"><a href="#"><i class="fa fa-calendar"></i></a>@item.ViewCount</li>
+                                </ul>
+                            </div>
+                            <h3>
+                                <a asp-action="blogdetail" asp-controller="blog" asp-area="" asp-route-id="@item.Id">@item.Title</a>
+                            </h3>
+                            <p>@item.Descreption.Substring(0,110)</p>
                         </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">By: Auro Navanth</a></strong>
-                                </li>
-                                <li class="float-right mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>205</li>
-                                <li class="float-right"><a href="#"><i class="fa fa-calendar"></i></a>328</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-details.html">Standard Post Format Title</a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
                     </div>
                 </div>
-            </div>
-            <div class="item slide-box">
-                <div class="blog-1">
-                    <div class="blog-image">
-                        <img src="~/assets/img/blog/img-4.jpg" alt="image" class="img-fluid w-100">
-                        <div class="profile-user">
-                            <img src="~/assets/img/avatar/avatar-2.jpg" alt="user">
-                        </div>
-                        <div class="date-box">
-                            <span>06</span>Sep
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">By: Navanth Auro</a></strong>
-                                </li>
-                                <li class="float-right mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>205</li>
-                                <li class="float-right"><a href="#"><i class="fa fa-calendar"></i></a>328</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-details.html">Alpha Hotel Pars Studiorum</a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item slide-box">
-                <div class="blog-1">
-                    <div class="blog-image">
-                        <img src="~/assets/img/blog/img-5.jpg" alt="image" class="img-fluid w-100">
-                        <div class="profile-user">
-                            <img src="~/assets/img/avatar/avatar-3.jpg" alt="user">
-                        </div>
-                        <div class="date-box">
-                            <span>14</span>Sep
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">By: Tanzim</a></strong>
-                                </li>
-                                <li class="float-right mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>205</li>
-                                <li class="float-right"><a href="#"><i class="fa fa-calendar"></i></a>328</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-details.html">Best Night Photo at Alpha Hotel </a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item slide-box">
-                <div class="blog-1">
-                    <div class="blog-image">
-                        <img src="~/assets/img/blog/img-6.jpg" alt="image" class="img-fluid w-100">
-                        <div class="profile-user">
-                            <img src="~/assets/img/avatar/avatar-3.jpg" alt="user">
-                        </div>
-                        <div class="date-box">
-                            <span>14</span>Sep
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">By: Tanzim</a></strong>
-                                </li>
-                                <li class="float-right mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>205</li>
-                                <li class="float-right"><a href="#"><i class="fa fa-calendar"></i></a>328</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-details.html">Best Night Photo at Alpha Hotel </a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
