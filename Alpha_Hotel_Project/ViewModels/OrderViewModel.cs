@@ -40,5 +40,9 @@ namespace Alpha_Hotel_Project.ViewModels
         public AppUser? AppUser { get; set; }
         public double AdultPrice { get; set; }
         public List<Room>? Rooms { get; set; }
+        public List<Partner>? Partners { get; set; }
+        public List<Room>? RecentRooms { get; set; }
+        public List<Room>? PopularRooms { get; set; }
+        public List<HouseRules>? HouseRules { get; set; }
     }
 }

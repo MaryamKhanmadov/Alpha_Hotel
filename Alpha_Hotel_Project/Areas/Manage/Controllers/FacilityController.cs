@@ -1,7 +1,9 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Alpha_Hotel_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Alpha_Hotel_Project.Areas.Manage.Controllers
 {
@@ -9,18 +11,15 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
     public class FacilityController : Controller
     {
         private readonly AppDbContext _appDbContext;
-
         public FacilityController(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            HomeViewModel homeViewModel = new HomeViewModel
-            {
-                Facilities = _appDbContext.Facilities.ToList()
-            };
-            return View(homeViewModel);
+            var query = _appDbContext.Facilities.Where(x=>x.IsDeleted==false).AsQueryable();
+            PaginatedList<Facility> facilities = PaginatedList<Facility>.Create(query, 5, page);
+            return View(facilities);
         }
         public IActionResult Create()
         {
@@ -61,9 +60,30 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             Facility facility = _appDbContext.Facilities.FirstOrDefault(x => x.Id == id);
             if (facility == null) return View("Error");
             facility.IsDeleted = true;
-            //_appDbContext.Professions.Remove(profession);
             _appDbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public IActionResult SoftDeleteIndex(int page = 1)
+        {
+            var query = _appDbContext.Facilities.Where(x => x.IsDeleted == true).AsQueryable();
+            PaginatedList<Facility> facilities = PaginatedList<Facility>.Create(query, 5, page);
+            return View(facilities);
+        }
+        public IActionResult HardDelete(Guid id)
+        {
+            Facility facility = _appDbContext.Facilities.FirstOrDefault(x => x.Id == id);
+            if (facility == null) return View("Error");
+            _appDbContext.Facilities.Remove(facility);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
+        }
+        public IActionResult Restore(Guid id)
+        {
+            Facility facility = _appDbContext.Facilities.FirstOrDefault(x => x.Id == id);
+            if (facility == null) return View("Error");
+            facility.IsDeleted = false;
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
         }
     }
 }

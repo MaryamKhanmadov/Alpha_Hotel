@@ -1,13 +1,8 @@
-﻿@model List<About>
-@{
-    int count = 0;
-}
-
+﻿@model About
 <div class="container-fluid pt-4 px-4">
     <div class="col-12">
         <div class="bg-light rounded h-100 p-4">
-            <h6 style="margin-bottom: 0.5rem !important;" class="mb-4 border-bottom">About List</h6>
-            <a style="float:right" class="btn btn-danger m-2" asp-action="create" asp-controller="about">Create About</a>
+            <h6 style="margin-bottom: 1.5rem !important;" class="mb-4 border-bottom">About </h6>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -20,24 +15,19 @@
                     </tr>
                 </thead>
                 <tbody style="vertical-align: middle;">
-                    @foreach (var item in Model)
-                    {
-                        count++;
                         <tr>
-                            <th scope="row">@count</th>
+                            <th scope="row">1</th>
                             <td>
-                                <img style="width: 50px;height:50px;border-radius: 50%;" src="~/uploads/about/@item.ImageBig">
-                                <img style="width: 50px;height:50px;border-radius: 50%;" src="~/uploads/about/@item.ImageSmall">
+                                <img style="width: 50px;height:50px;border-radius: 50%;" src="~/uploads/about/@Model.ImageBig">
+                                <img style="width: 50px;height:50px;border-radius: 50%;" src="~/uploads/about/@Model.ImageSmall">
                             </td>
-                            <td>@item.Title</td>
-                            <td>@item.ButtonText</td>
-                            <td>@item.ExperienceBoxText</td>
+                            <td>@Model.Title</td>
+                            <td>@Model.ButtonText</td>
+                            <td>@Model.ExperienceBoxText</td>
                             <td>
-                                <a class="btn btn-sm btn-sm-square btn-outline-success m-2" asp-action="update" asp-route-id="@item.Id" asp-controller="about"> <i class="fa fa-pen"></i> </a>
-                                <a class="btn btn-sm btn-sm-square btn-outline-danger m-2 delete-button" asp-route-id="@item.Id" asp-action="delete" asp-controller="about"> <i class="fa fa-trash"></i> </a>
+                                <a class="btn btn-sm btn-sm-square btn-outline-success m-2" asp-action="update" asp-route-id="@Model.Id" asp-controller="about"> <i class="fa fa-pen"></i> </a>
                             </td>
                         </tr>
-                    }
                 </tbody>
             </table>
         </div>

@@ -7,5 +7,6 @@ namespace Alpha_Hotel_Project.Models
     {
         [StringLength(maximumLength: 50)]
         public string Fullname { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Alpha_Hotel_Project.Areas.Manage.Controllers
 {
@@ -13,9 +15,10 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         {
             _appDbContext = appDbContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<Profession> professions = _appDbContext.Professions.Where(x=>x.IsDeleted==false).ToList();
+            var query = _appDbContext.Professions.Where(x=>x.IsDeleted==false).AsQueryable();
+            PaginatedList<Profession> professions = PaginatedList<Profession>.Create(query, 5, page);
             return View(professions);
         }
         public IActionResult Create()
@@ -55,9 +58,30 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             Profession profession = _appDbContext.Professions.FirstOrDefault(x => x.Id == id);
             if (profession == null) return View("Error");
             profession.IsDeleted = true;
-            //_appDbContext.Professions.Remove(profession);
             _appDbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public IActionResult SoftDeleteIndex(int page = 1)
+        {
+            var query = _appDbContext.Professions.Where(x => x.IsDeleted == true).AsQueryable();
+            PaginatedList<Profession> professions = PaginatedList<Profession>.Create(query, 5, page);
+            return View(professions);
+        }
+        public IActionResult HardDelete(Guid id)
+        {
+            Profession profession = _appDbContext.Professions.FirstOrDefault(x => x.Id == id);
+            if (profession == null) return View("Error");
+            _appDbContext.Professions.Remove(profession);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
+        }
+        public IActionResult Restore(Guid id)
+        {
+            Profession profession = _appDbContext.Professions.FirstOrDefault(x => x.Id == id);
+            if (profession == null) return View("Error");
+            profession.IsDeleted = false;
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
         }
     }
 }

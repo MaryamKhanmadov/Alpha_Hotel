@@ -1,6 +1,8 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Alpha_Hotel_Project.Areas.Manage.Controllers
 {
@@ -13,9 +15,10 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         {
             _appDbContext = appDbContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<BlogCategory> blogCategories = _appDbContext.BlogCategories.Where(x => x.IsDeleted == false).ToList();
+            var query = _appDbContext.BlogCategories.Where(x => x.IsDeleted == false).AsQueryable();
+            PaginatedList<BlogCategory> blogCategories = PaginatedList<BlogCategory>.Create(query, 5, page);
             return View(blogCategories);
         }
         public IActionResult Create()
@@ -55,9 +58,30 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             BlogCategory category = _appDbContext.BlogCategories.FirstOrDefault(x => x.Id == id);
             if (category == null) return View("Error");
             category.IsDeleted = true;
-            //_appDbContext.Professions.Remove(profession);
             _appDbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public IActionResult SoftDeleteIndex(int page=1)
+        {
+            var query = _appDbContext.BlogCategories.Where(x => x.IsDeleted == true).AsQueryable();
+            PaginatedList<BlogCategory> blogCategories = PaginatedList<BlogCategory>.Create(query, 5, page);
+            return View(blogCategories);
+        }
+        public IActionResult HardDelete(Guid id)
+        {
+            BlogCategory category = _appDbContext.BlogCategories.FirstOrDefault(x => x.Id == id);
+            if (category == null) return View("Error");
+            _appDbContext.BlogCategories.Remove(category);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
+        }
+        public IActionResult Restore(Guid id)
+        {
+            BlogCategory category = _appDbContext.BlogCategories.FirstOrDefault(x => x.Id == id);
+            if (category == null) return View("Error");
+            category.IsDeleted = false;
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
         }
     }
 }

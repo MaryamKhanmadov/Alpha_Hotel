@@ -13,7 +13,6 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _env;
-
         public BlogController(AppDbContext appDbContext, IWebHostEnvironment env)
         {
             _appDbContext = appDbContext;
@@ -85,7 +84,6 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
                 string path = Path.Combine(_env.WebRootPath, "uploads/blogs", existblog.ImageUrl);
                 if (System.IO.File.Exists(path))
                 {
-
                     System.IO.File.Delete(path);
                 }
                 existblog.ImageUrl = blog.ImageFile.SaveFile(_env.WebRootPath, "uploads/blogs");
@@ -108,12 +106,33 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         {
             Blog blog = _appDbContext.Blogs.FirstOrDefault(x => x.Id == id);
             if (blog is null) return View("Error");
-            //string path = Path.Combine(_env.WebRootPath, "uploads/blogs", blog.ImageUrl);
-            //System.IO.File.Delete(path);
-            //_appDbContext.Remove(blog);
             blog.IsDeleted = true;
             _appDbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public IActionResult SoftDeleteIndex(int page = 1)
+        {
+            var query = _appDbContext.Blogs.Include(x => x.BlogCategory).Where(x => x.IsDeleted == true).AsQueryable();
+            PaginatedList<Blog> blogs = PaginatedList<Blog>.Create(query, 5, page);
+            return View(blogs);
+        }
+        public IActionResult HardDelete(Guid id)
+        {
+            Blog blog = _appDbContext.Blogs.FirstOrDefault(x => x.Id == id);
+            if (blog is null) return View("Error");
+            string path = Path.Combine(_env.WebRootPath, "uploads/blogs", blog.ImageUrl);
+            System.IO.File.Delete(path);
+            _appDbContext.Remove(blog);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
+        }
+        public IActionResult Restore(Guid id)
+        {
+            Blog blog = _appDbContext.Blogs.FirstOrDefault(x => x.Id == id);
+            if (blog == null) return View("Error");
+            blog.IsDeleted = false;
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
         }
         public IActionResult BlogCommentIndex(Guid id , int page=1)
         {

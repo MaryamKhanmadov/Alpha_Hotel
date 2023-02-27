@@ -13,7 +13,6 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _env;
-
         public SettingController(AppDbContext appDbContext, IWebHostEnvironment env)
         {
             _appDbContext = appDbContext;

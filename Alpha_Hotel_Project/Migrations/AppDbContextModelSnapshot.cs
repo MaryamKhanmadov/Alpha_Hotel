@@ -287,6 +287,25 @@ namespace Alpha_Hotel_Project.Migrations
                     b.ToTable("Facilities");
                 });
 
+            modelBuilder.Entity("Alpha_Hotel_Project.Models.HouseRules", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(90)
+                        .HasColumnType("nvarchar(90)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HouseRules");
+                });
+
             modelBuilder.Entity("Alpha_Hotel_Project.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -855,6 +874,9 @@ namespace Alpha_Hotel_Project.Migrations
             modelBuilder.Entity("Alpha_Hotel_Project.Models.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Fullname")
                         .IsRequired()

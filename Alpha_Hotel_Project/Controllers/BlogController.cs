@@ -49,7 +49,6 @@ namespace Alpha_Hotel_Project.Controllers
             _appDbContext.SaveChanges();
             return View(blogVM);
         }
-
         [HttpPost]
         public IActionResult BlogDetail(Guid id, BlogViewModel blogVM)
         {
@@ -61,7 +60,6 @@ namespace Alpha_Hotel_Project.Controllers
             {
                 BlogComment = blogVM.BlogComment
             };
-
             BlogComment comment = blogVM.BlogComment;
             if (!ModelState.IsValid) return View(blogVM);
             if (blogVM.BlogComment.CommentEmail is null)

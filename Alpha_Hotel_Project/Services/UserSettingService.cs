@@ -30,5 +30,9 @@ namespace Alpha_Hotel_Project.Services
         {
             return await _appDbContext.Settings.ToListAsync();
         }
+        public async Task<List<ContactMessage>> GetContactMessages()
+        {
+            return await _appDbContext.ContactMessages.OrderByDescending(x => x.MessageTime).Take(3).ToListAsync();
+        }
     }
 }

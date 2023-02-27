@@ -1,6 +1,8 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 
@@ -14,9 +16,10 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         {
             _appDbContext = appDbContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<Order> orders = _appDbContext.Orders.Include(x => x.OrderItem).ToList();
+            var query = _appDbContext.Orders.Include(x => x.OrderItem).AsQueryable();
+            PaginatedList<Order> orders = PaginatedList<Order>.Create(query, 5, page);
             return View(orders);
         }
         public IActionResult Detail(Guid id)

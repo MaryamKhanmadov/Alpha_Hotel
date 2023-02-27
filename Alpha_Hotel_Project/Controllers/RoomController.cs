@@ -46,6 +46,10 @@ namespace Alpha_Hotel_Project.Controllers
             Room room = _appDbContext.Rooms.Include(x => x.Category).Include(x => x.RoomImages).FirstOrDefault(x => x.Id == id);
             OrderViewModel orderViewModel = new OrderViewModel
             {
+                HouseRules = _appDbContext.HouseRules.ToList(),
+                PopularRooms = _appDbContext.Rooms.Include(x=>x.RoomImages).OrderByDescending(x=>x.ViewCount).Take(4).ToList(),
+                RecentRooms = _appDbContext.Rooms.Include(x=>x.RoomImages).OrderByDescending(x=>x.RoomCreationDate).Take(3).ToList(),
+                Partners = _appDbContext.Partners.ToList(),
                 Room = room,
                 Fullname = member?.Fullname,
                 PhoneNumber = member?.PhoneNumber,
@@ -55,13 +59,6 @@ namespace Alpha_Hotel_Project.Controllers
             if (room is null) return View("Error");
             _appDbContext.SaveChanges();
             return View(orderViewModel);
-        }
-        [HttpGet]
-        public IActionResult AllRooms(int page=1)
-        {
-            var query = _appDbContext.Rooms.Include(x => x.RoomImages).Include(x => x.Category).Where(x => x.IsDeleted == false);
-            PaginatedList<Room> rooms = PaginatedList<Room>.Create(query, 4, page);
-            return View(rooms);
         }
         [HttpPost]
         public async Task<IActionResult> BookingSystem(Guid id, OrderViewModel orderVM)
@@ -78,7 +75,7 @@ namespace Alpha_Hotel_Project.Controllers
                 ModelState.AddModelError("", "The Country field is required.");
                 return View("detail", orderVM);
             }
-            if (!ModelState.IsValid) { return View("detail" , orderVM); }
+            if (!ModelState.IsValid) return View("detail" , orderVM);
             int Startdate = orderVM.StartRentDate.DayOfYear;
             int Enddate = orderVM.EndRentDate.DayOfYear;
             string YearDate = orderVM.StartRentDate.ToString("yyyy");
@@ -122,7 +119,7 @@ namespace Alpha_Hotel_Project.Controllers
                 ModelState.AddModelError("EndRentDate", "Up to 30 day reservation allowed");
                 return View("detail", orderVM);
             }
-            if (orderVM.ChildCount < 0 || orderVM.AdultCount < 0)
+            if (orderVM.ChildCount < 0 || orderVM.AdultCount <= 0 || orderVM.ChildCount  > 5 || orderVM.AdultCount > 5)
             {
                 ModelState.AddModelError("ChildCount", "Please , select correct count");
                 return View("detail", orderVM);

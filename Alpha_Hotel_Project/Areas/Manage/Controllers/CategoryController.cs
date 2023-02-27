@@ -1,4 +1,5 @@
 ﻿using Alpha_Hotel_Project.Data;
+using Alpha_Hotel_Project.Helpers;
 using Alpha_Hotel_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,10 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         {
             _appDbContext = appDbContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<Category> categories = _appDbContext.Categories.Where(x => x.IsDeleted == false).ToList();
+            var query = _appDbContext.Categories.Where(x => x.IsDeleted == false).AsQueryable();
+            PaginatedList<Category> categories = PaginatedList<Category>.Create(query, 5, page);
             return View(categories);
         }
         public IActionResult Create()
@@ -55,9 +57,30 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
             if (category == null) return View("Error");
             category.IsDeleted = true;
-            //_appDbContext.Professions.Remove(profession);
             _appDbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public IActionResult SoftDeleteIndex(int page = 1)
+        {
+            var query = _appDbContext.Categories.Where(x => x.IsDeleted == true).AsQueryable();
+            PaginatedList<Category> Categories = PaginatedList<Category>.Create(query, 5, page);
+            return View(Categories);
+        }
+        public IActionResult HardDelete(Guid id)
+        {
+            Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+            if (category == null) return View("Error");
+            _appDbContext.Categories.Remove(category);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
+        }
+        public IActionResult Restore(Guid id)
+        {
+            Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+            if (category == null) return View("Error");
+            category.IsDeleted = false;
+            _appDbContext.SaveChanges();
+            return RedirectToAction("SoftDeleteIndex");
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿@inject Alpha_Hotel_Project.Services.UserSettingService service;
 @{
     AppUser appUser = await service.GetUser();
+    List<ContactMessage> contactMessages = await service.GetContactMessages();
 }
-@model DashboardViewModel
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +32,7 @@
     <!-- Libraries Stylesheet -->
     <link href="~/assets/manage/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="~/assets/manage/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/assets/manage/css/bootstrap.min.css" rel="stylesheet">
 
@@ -75,18 +75,20 @@
                     <div class="nav-item">
                         <a href="#" class="nav-link dropdown-toggle" ><i class="fa fa-laptop me-2"></i>Elements</a>
                     </div>
-                    <a asp-action="index" asp-controller="setting" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Settings</a>
-                    <a asp-action="index" asp-controller="blogcategory" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>BlogCategory</a>
-                    <a asp-action="index" asp-controller="blog" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Blogs</a>
+                    <a asp-action="index" asp-controller="setting" class="nav-item nav-link"><i class="fa fa-gears me-2"></i>Settings</a>
+                    <a asp-action="index" asp-controller="user" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Users</a>
+                    <a asp-action="index" asp-controller="blogcategory" class="nav-item nav-link"><i class="fa fa-fan me-2"></i>BlogCategory</a>
+                    <a asp-action="index" asp-controller="blog" class="nav-item nav-link"><i class="fa-solid fa-file-image me-2"></i></i>Blogs</a>
                     <a asp-action="index" asp-controller="category" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Category</a>
-                    <a asp-action="index" asp-controller="room" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Room</a>
-                    <a asp-action="index" asp-controller="facility" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Facility</a>
-                    <a asp-action="index" asp-controller="about" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>About</a>
-                    <a asp-action="index" asp-controller="profession" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Profession</a>
-                    <a asp-action="index" asp-controller="staff" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Staff</a>
-                    <a asp-action="index" asp-controller="slider" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Slider</a>
-                    <a asp-action="index" asp-controller="partner" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Partner</a>
-                    <a asp-action="index" asp-controller="contactmessage" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Message</a>
+                    <a asp-action="index" asp-controller="room" class="nav-item nav-link"><i class="fa fa-house me-2"></i>Room</a>
+                    <a asp-action="index" asp-controller="facility" class="nav-item nav-link"><i class="fa-sharp fa-solid fa-receipt"></i>Facility</a>
+                    <a asp-action="index" asp-controller="about" class="nav-item nav-link"><i class="fa fa-address-card me-2"></i>About</a>
+                    <a asp-action="index" asp-controller="profession" class="nav-item nav-link"><i class="fa fa-user-tie me-2"></i>Profession</a>
+                    <a asp-action="index" asp-controller="staff" class="nav-item nav-link"><i class="fa-sharp fa-solid fa-person"></i>Staff</a>
+                    <a asp-action="index" asp-controller="slider" class="nav-item nav-link"><i class="fa fa-sliders me-2"></i>Slider</a>
+                    <a asp-action="index" asp-controller="partner" class="nav-item nav-link"><i class="fa fa-handshake me-2"></i>Partner</a>
+                    <a asp-action="index" asp-controller="Houserules" class="nav-item nav-link"><i class="fa fa-hotel me-2"></i>Hotel Rules</a>
+                    <a asp-action="index" asp-controller="contactmessage" class="nav-item nav-link"><i class="fa fa-message me-2"></i>Message</a>
                 </div>
             </nav>
         </div>
@@ -111,7 +113,7 @@
                             <span class="d-none d-lg-inline-flex">Message</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            @*@foreach (var item in Model?.ContactMessages)
+                            @foreach (var item in contactMessages)
                             {
                                 <a asp-action="index" asp-controller="contactmessage" asp-area="manage" class="dropdown-item">
                                     <div class="d-flex align-items-center">
@@ -123,7 +125,7 @@
                                     </div>
                                 </a>
                                 <hr class="dropdown-divider">
-                            }*@
+                            }
                             <a asp-action="index" asp-controller="contactmessage" asp-area="manage" class="dropdown-item text-center">See all message</a>
                         </div>
                     </div>
@@ -174,7 +176,7 @@
     <script src="~/assets/manage/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="~/assets/manage/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.1/sweetalert2.min.js" integrity="sha512-vCI1Ba/Ob39YYPiWruLs4uHSA3QzxgHBcJNfFMRMJr832nT/2FBrwmMGQMwlD6Z/rAIIwZFX8vJJWDj7odXMaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/v4-shims.min.js" integrity="sha512-7cs6q0x+QVwp7v0xeHb8DYY9IR41u+viyQgQEpEYqOxL9OHOVNeA/nfBt9i/U+TRdS/NJnEemUgFvDa4qMhACw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Template Javascript -->
     <script src="~/assets/manage/js/main.js"></script>
     <script src="~/assets/manage/js/delete.js"></script>

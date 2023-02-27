@@ -26,5 +26,6 @@ namespace Alpha_Hotel_Project.Data
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<HouseRules> HouseRules { get; set; }
     }
 }

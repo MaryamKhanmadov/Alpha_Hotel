@@ -37,7 +37,7 @@
                 <div class="contact-form">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" asp-action="index" asp-controller="contact">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-floating mb-4">
@@ -82,7 +82,7 @@
                                 </div>
                             </form>
                         }else{
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" asp-action="index" asp-controller="contact">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-floating mb-4">

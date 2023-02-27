@@ -11,7 +11,6 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _env;
-
         public AboutController(AppDbContext appDbContext, IWebHostEnvironment env)
         {
             _appDbContext = appDbContext;
@@ -19,46 +18,8 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
         }
         public IActionResult Index()
         {
-            List<About> abouts = _appDbContext.Abouts.Where(x => x.IsDeleted == false).ToList();
-            return View(abouts);
-        }
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(About about)
-        {
-            if (!ModelState.IsValid) return View();
-
-            if (about.ImageSmallFile.ContentType != "image/png" && about.ImageSmallFile.ContentType != "image/jpeg")
-            {
-                ModelState.AddModelError("ImageFile", "You can only upload image type png or jpeg");
-                return View();
-            }
-            if (about.ImageSmallFile.Length > 2097152)
-            {
-                ModelState.AddModelError("ImageFile", "You can only upload image size than lower 2mb");
-                return View();
-            }
-            about.ImageSmall = about.ImageSmallFile.SaveFile(_env.WebRootPath, "uploads/about");
-
-            if (about.ImageBigFile.ContentType != "image/png" && about.ImageBigFile.ContentType != "image/jpeg")
-            {
-                ModelState.AddModelError("ImageFile", "You can only upload image type png or jpeg");
-                return View();
-            }
-            if (about.ImageBigFile.Length > 2097152)
-            {
-                ModelState.AddModelError("ImageFile", "You can only upload image size than lower 2mb");
-                return View();
-            }
-            about.ImageBig = about.ImageBigFile.SaveFile(_env.WebRootPath, "uploads/about");
-
-            _appDbContext.Abouts.Add(about);
-            _appDbContext.SaveChanges();
-            return RedirectToAction("Index");
+            About about = _appDbContext.Abouts.Where(x => x.IsDeleted == false).FirstOrDefault();
+            return View(about);
         }
         public IActionResult Update(Guid id)
         {
@@ -108,15 +69,6 @@ namespace Alpha_Hotel_Project.Areas.Manage.Controllers
             existabout.Title = about.Title;
             existabout.ExperienceBoxText = about.ExperienceBoxText;
 
-            _appDbContext.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        public IActionResult Delete(Guid id)
-        {
-            About about = _appDbContext.Abouts.FirstOrDefault(x => x.Id == id);
-            if (about == null) return View("Error");
-            about.IsDeleted = true;
-            //_appDbContext.Professions.Remove(profession);
             _appDbContext.SaveChanges();
             return RedirectToAction("Index");
         }

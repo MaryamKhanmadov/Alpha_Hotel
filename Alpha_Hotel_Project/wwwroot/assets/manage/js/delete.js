@@ -18,15 +18,14 @@ deleteBtns.forEach(btn => btn.addEventListener("click", function (e) {
             fetch(url)
                 .then(response => {
                     if (response.status == 200) {
-                        alert("Deleted");
                         window.location.reload(true);
                     } else {
-                        alert("Error!");
                     }
                 })
         }
     })
 }))
+
 
 let deletebtnimages = document.querySelectorAll(".delete-image-button");
 

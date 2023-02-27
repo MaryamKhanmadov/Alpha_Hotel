@@ -17,10 +17,10 @@ namespace Alpha_Hotel_Project.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(ContactMessage message)
+        public IActionResult Index(ContactMessage ContactMessage)
         {
-            if (!ModelState.IsValid) return View(message);
-            _appDbContext.ContactMessages.Add(message);
+            if (!ModelState.IsValid) return View(ContactMessage);
+            _appDbContext.ContactMessages.Add(ContactMessage);
             _appDbContext.SaveChanges();
             return RedirectToAction("index");
         }
